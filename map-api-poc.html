@@ -1,0 +1,147 @@
+<html>
+<head>
+<!-- Grab latest version of jQuery -->
+<script type="text/javascript"
+        src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js">
+</script>
+<!-- script type="text/javascript" src="http://www.google.com/jsapi"></script -->
+<script src="galleria/src/galleria.js"></script>
+<script type="text/javascript">
+
+  // Load the latest version of the Google Data JavaScript Client
+//  google.load('gdata', '2.x', {packages: ['maps']});
+//  google.load('feeds', '1');
+
+/*
+
+  var service = null;
+
+  function showMapData() {
+
+		var token = google.accounts.user.checkLogin('http://maps.google.com/maps/feeds');
+		if (!token) {
+			token = google.accounts.user.login('http://maps.google.com/maps/feeds');
+		}
+		service = new google.gdata.maps.MapsService('bid-poc');
+		var mapFeedUrl = 'http://maps.google.com/maps/feeds/maps/default/owned';
+
+	    service.getMapFeed(mapFeedUrl, function(feedRoot) {
+			var feed = feedRoot.feed;
+			var entries = feed.getEntries();
+			var finalText = "";
+			for (var i = 0; i < entries.length; i++) {
+				var entry = entries[i];
+				var mapTitle = entry.getTitle().getText();
+				finalText += mapTitle + "\n";
+			}
+
+			$('#output').val(finalText);
+		});
+  }
+
+  function checkLogin() {
+      return google.accounts.user.checkLogin('http://maps.google.com/maps/feeds');
+  }
+
+  google.setOnLoadCallback(function() {
+	  $(document).ready(function() {
+//		  $('#map-go').click(showMapData);
+//		  $('#map-go').show();
+		  var feed = new google.feeds.Feed('http://gallupbid.smugmug.com/hack/feed.mg?Type=nicknameRecentPhotos&Data=GallupBID&format=rss200&Size=Medium');
+		  feed.load(function(result) {
+			  if (result.error) {
+			     console.log('error');
+				 return;
+			 }
+
+			 var urlList = "";
+			 for (var i = 0; i < result.feed.entries.length; i++) {
+			 	var entry = result.feed.entries[i];
+//				var imgTag = '<img style="display:none;" src="' + entry.mediaGroups[0].contents[2].url + '" /><br />';
+//				$('#gallery').append(imgTag);
+				urlList += "\nENTRY " + i + ":\n";
+				for (var j = 0; j < entry.mediaGroups[0].contents.length; j++) {
+					var mediaItem = entry.mediaGroups[0].contents[j];
+					urlList += mediaItem.url + "\n";
+				}
+			 }
+			 $('#output').val(urlList);
+/*
+			 $('#gallery').children('img').each(function(i) {
+				 $(this).show('slow');
+			 });
+			 */
+  /*
+		 });
+			 	
+	  });
+  });
+  */
+var gallupImgs = {
+	queue: [
+		'http://gallupbid.smugmug.com/Other/Gallup-Murals/Fireball3448/1005392887_95WfW',
+		'http://gallupbid.smugmug.com/Other/Gallup-Murals/Mural4th66/1005392416_HNEkQ',
+		'http://gallupbid.smugmug.com/Other/Gallup-Murals/Fireball3564/1005392091_EyAYv',
+		'http://gallupbid.smugmug.com/Other/Gallup-Murals/Fireball3556/1005392015_N8TeZ',
+	],
+	currentIndex: 0,
+}
+
+function getNext()
+{
+	if (++gallupImgs.currentIndex == gallupImgs.queue.length) {
+		return null;
+	}
+
+	return gallupImgs.queue[gallupImgs.currentIndex];
+}
+
+var galleryData = [];
+for (var i = 0; i < gallupImgs.queue.length; i++) {
+	var thumbUrl = gallupImgs.queue[i] + '-Th.jpg';
+	var imgUrl = gallupImgs.queue[i] + '-M.jpg';
+	galleryData.push(
+		{
+			image: imgUrl,
+			thumb: thumbUrl
+		}
+	);
+}
+
+Galleria.loadTheme('galleria/src/themes/classic/galleria.classic.js');
+$(document).ready(function() {
+//	$('#gallery').hide();
+	$.each(galleryData, function(index, value) {
+		var imgUrl = value.image;
+		$('#gallery').append('<img src="'+imgUrl+'" />');
+	});
+	$('#gallery').galleria(
+		{
+//		   data_source: galleryData,
+		   debug: true
+		}
+	);
+//  $('#gallery').show();
+});
+
+
+</script>
+<style type='text/css'>
+#gallery {
+	width: 670px;
+	height: 420px;
+}
+</style>
+
+</head>
+<body>
+<img src='digital-craftworks-name.png' style='display:none;'/>
+<p>
+<input type='button' value='Show Map List' id='map-go' style='display:none;' />
+</p>
+<div id='gallery'>
+</div>
+<!-- textarea id='output' rows='35' cols='160'>
+</textarea -->
+</body>
+</html>
