@@ -1,10 +1,11 @@
-<html>
+<!DOCTYPE html> 
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
 <head>
 <!-- Grab latest version of jQuery -->
 <script type="text/javascript"
         src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js">
 </script>
-<!-- script type="text/javascript" src="http://www.google.com/jsapi"></script -->
+
 <script type="text/javascript">
 
 var gallupImgs = {
@@ -14,16 +15,43 @@ var gallupImgs = {
 		'http://gallupbid.smugmug.com/Other/Gallup-Murals/Fireball3564/1005392091_EyAYv',
 		'http://gallupbid.smugmug.com/Other/Gallup-Murals/Fireball3556/1005392015_N8TeZ',
 	],
-	currentIndex: 0,
+	currentIndex: 0
 }
 
 function getNext()
 {
-	if (++gallupImgs.currentIndex == gallupImgs.queue.length) {
+	if (gallupImgs.currentIndex == gallupImgs.queue.length) {
 		return null;
 	}
 
-	return gallupImgs.queue[gallupImgs.currentIndex];
+	return gallupImgs.queue[gallupImgs.currentIndex++];
+}
+
+var imageCounter = 0;
+function placeNext()
+{
+	var newUrl = getNext();
+	if (newUrl == null) {
+		alert("end of the line!");
+		return;
+	}
+
+	var featuredImg = '<img id="featured-' + imageCounter + '" '
+		            + 'src="' + newUrl + '-S.jpg" />';
+
+	var newThumb = '<img src="' + newUrl + '-Ti.jpg" />';
+
+	var newThumbDiv = '<div id="thumb-' + imageCounter + '" '
+		            + 'class="thumb">' + newThumb + '</div>';
+
+	if (imageCounter > 0) {
+		$('#featured-' + (imageCounter - 1)).hide();
+	}
+
+	imageCounter++;
+
+	$('#featured').append(featuredImg);
+	$('#thumbnails').append(newThumbDiv);
 }
 
 var galleryData = [];
@@ -38,40 +66,86 @@ for (var i = 0; i < gallupImgs.queue.length; i++) {
 	);
 }
 
-Galleria.loadTheme('galleria/src/themes/classic/galleria.classic.js');
 $(document).ready(function() {
-//	$('#gallery').hide();
-	$.each(galleryData, function(index, value) {
-		var imgUrl = value.image;
-		$('#gallery').append('<img src="'+imgUrl+'" />');
-	});
-	$('#gallery').galleria(
-		{
-//		   data_source: galleryData,
-		   debug: true
-		}
-	);
-//  $('#gallery').show();
+	$('#get-another').click(placeNext);
 });
-
-
 </script>
+
+<link rel='stylesheet' type='text/css' href='css/reset.css' /> 
 <style type='text/css'>
-#gallery {
-	width: 670px;
-	height: 420px;
+
+#canvas {
+	width: 1060px;
+	padding: 0 10px;
+	margin: 0 auto;
 }
+
+section {
+	display: block;
+	float: left;
+	height: 500px;
+}
+
+section+section {
+	margin-left: 20px;
+}
+
+#photos {
+	width: 340px;
+}
+
+#featured img {
+	max-width: 340px;
+}
+
+#map {
+	width: 700px;
+}
+
+#featured {
+	height: 260px;
+	margin-bottom: 60px;
+}
+
+#thumbnails .thumb {
+	display: block;
+	float: left;
+	width: 100px;
+	height: 100px;	
+}
+
 </style>
 
 </head>
+
 <body>
-<img src='digital-craftworks-name.png' style='display:none;'/>
-<p>
-<input type='button' value='Show Map List' id='map-go' style='display:none;' />
-</p>
-<div id='gallery'>
+
+<div id='canvas'>
+
+<section id='photos'>
+
+	<div id='featured'>
+		<!-- place here:
+				<img src='<smugmug Small URL>' />
+		-->
+	</div>
+
+	<div id='thumbnails'>
+		<!-- to be filled with:
+			<figure class='thumb'>
+				<img src='<smugmug Tiny URL>' />
+			</figure>
+		-->
+	</div>
+</section>
+
+<section id='map'>
+	<p>
+		<button id='get-another' type='button'>Get An Image</button>
+	</p>
+</section>
+
 </div>
-<!-- textarea id='output' rows='35' cols='160'>
-</textarea -->
+<img src='digital-craftworks-name.png' style='display:none;'/>
 </body>
 </html>
