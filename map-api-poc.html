@@ -46,24 +46,13 @@ function placeNext()
 
 	if (imageCounter > 0) {
 		$('#featured-' + (imageCounter - 1)).hide();
+		$('#thumb-' + (imageCounter -1)).show();
 	}
 
 	imageCounter++;
 
 	$('#featured').append(featuredImg);
-	$('#thumbnails').append(newThumbDiv);
-}
-
-var galleryData = [];
-for (var i = 0; i < gallupImgs.queue.length; i++) {
-	var thumbUrl = gallupImgs.queue[i] + '-Th.jpg';
-	var imgUrl = gallupImgs.queue[i] + '-M.jpg';
-	galleryData.push(
-		{
-			image: imgUrl,
-			thumb: thumbUrl
-		}
-	);
+	$(newThumbDiv).hide().prependTo('#thumbnails');
 }
 
 $(document).ready(function() {
@@ -112,6 +101,7 @@ section+section {
 	float: left;
 	width: 100px;
 	height: 100px;	
+	margin: 0 10px 10px 0;
 }
 
 </style>
