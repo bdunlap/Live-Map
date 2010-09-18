@@ -7,6 +7,6 @@ function renderMap() {
 	 
 	var map = new google.maps.Map(document.getElementById("map-canvas"), myOptions);
 	   
-	var ctaLayer = new google.maps.KmlLayer('http://gallupbid.digitalcraftworks.com/bid.kml');
-	ctaLayer.setMap(map);
+	var districtOutlineAndMarkers = new google.maps.KmlLayer('http://gallupbid.digitalcraftworks.com/bid.kml');
+	districtOutlineAndMarkers.setMap(map);
 }

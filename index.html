@@ -15,7 +15,7 @@
         src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js">
 </script>
 <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script> 
-<script src='map-code.js'></script>
+<script src='http://gallupbid.digitalcraftworks.com/map-code.js'></script>
 
 <script type="text/javascript">
 
@@ -47,36 +47,70 @@ function placeNext()
 		return;
 	}
 
+	/**
+	 * Create HTML code for the featured image:
+	 *
+	 *   <img id="featured-[X]" src="[image URL here, with 'S' suffix so we use SmugMug's 'Small' version of the photo]" />
+	 *
+	 * ... where X is the value of imageCounter. Thus our "img" elements will
+	 * end up with IDs of 'featured-0', 'featured-1', 'featured-2', etc.
+	 */
 	var featuredImg = '<img id="featured-' + imageCounter + '" '
 		            + 'src="' + newUrl + '-S.jpg" />';
-
+	/**
+	 * Then create HTML code for the thumbnail. This one needs to be in a div so
+	 * that we can force the divs to have uniform dimensions:
+	 *
+	 *   <div id="thumb-[X]" class="thumb">
+	 *       <img src="[image URL here, with 'Ti' suffix so we use SmugMug's 'Tiny' version of the photo]" />
+     *   </div>
+	 */
 	var newThumb = '<img src="' + newUrl + '-Ti.jpg" />';
 
 	var newThumbDiv = '<div id="thumb-' + imageCounter + '" '
 		            + 'class="thumb">' + newThumb + '</div>';
 
 	if (imageCounter > 0) {
+		/**
+		 * We're past the first image in our rotation, so hide the current
+		 * featured image, before adding a new one, and show the current
+		 * thumbnail (before adding a new one).
+		 */
 		$('#featured-' + (imageCounter - 1)).hide();
 		$('#thumb-' + (imageCounter -1)).show();
 	}
 
 	imageCounter++;
 
+	/**
+	 * Add the new featured image to the 'featured' div, and add the new
+	 * thumbnail, hidden, to the front of the thumbnail gallery. We will
+	 * 'show()' the thumbnail next time through this loop, see above.
+	 */
 	$('#featured').append(featuredImg);
 	$(newThumbDiv).hide().prependTo('#thumbnails');
 }
 
 $(document).ready(function() {
-	$('#get-another').click(placeNext);
+	$('#get-an-image').click(placeNext);
 	renderMap();
 });
 </script>
 
-<link rel='stylesheet' type='text/css' href='css/reset.css' /> 
+<link rel='stylesheet' type='text/css'
+href='http://gallupbid.digitalcraftworks.com/css/reset.css' /> 
 <style type='text/css'>
 
+#uber-canvas {
+	background: url('http://gallupbid.digitalcraftworks.com/css/grid.jpg') no-repeat 0 0;
+	width: 1900px;
+	height: 1300px;
+	padding: 0;
+	margin: 0 auto;
+}
+
 #canvas {
-	width: 1060px;
+	width: 1004px;
 	padding: 0 10px;
 	margin: 0 auto;
 }
@@ -93,19 +127,19 @@ section {
 }
 
 section+section {
-	margin-left: 20px;
+	margin-left: 22px;
 }
 
 #photos {
-	width: 340px;
+	width: 320px;
 }
 
 #featured img {
-	max-width: 340px;
+	max-width: 320px;
 }
 
 #map-canvas {
-	width: 700px;
+	width: 662px;
 }
 
 #featured {
@@ -127,11 +161,12 @@ section+section {
 
 <body>
 
+<div id='uber-canvas'>
 <div id='canvas'>
 
 <header>
 	<nav>
-		<button id='get-another' type='button'>Get An Image</button>
+		<button id='get-an-image' type='button'>Get an Image</button>
 	</nav>
 </header>
 
@@ -156,6 +191,6 @@ section+section {
 </section>
 
 </div>
-<img src='digital-craftworks-name.png' style='display:none;'/>
+</div>
 </body>
 </html>
