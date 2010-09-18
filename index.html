@@ -29,6 +29,14 @@ var gallupImgs = {
 	currentIndex: 0
 }
 
+var c=0;
+var t;
+var timer_is_on=0;
+
+function changeMarker() 
+{
+}
+
 function getNext()
 {
 	if (gallupImgs.currentIndex == gallupImgs.queue.length) {
@@ -39,13 +47,33 @@ function getNext()
 }
 
 var imageCounter = 0;
+
+function timedCount()
+{
+        placeNext();
+        c=c+1;
+        if (c < 5) 
+        {
+            t=setTimeout("timedCount()",5000);
+        }
+}
+
+function doTimer()
+{
+    if (!timer_is_on)
+    {
+        timer_is_on=1;
+        timedCount();
+    }
+}
+
 function placeNext()
 {
 	var newUrl = getNext();
 	if (newUrl == null) {
 		alert("end of the line!");
 		return;
-	}
+}
 
 	/**
 	 * Create HTML code for the featured image:
@@ -92,8 +120,11 @@ function placeNext()
 }
 
 $(document).ready(function() {
-	$('#get-an-image').click(placeNext);
-	renderMap();
+
+    $('#get-an-image').click(placeNext);
+    $('#start-timer').click(doTimer);
+    $('change-marker').click(changeMarker);
+    renderMap();
 });
 </script>
 
@@ -167,6 +198,9 @@ section+section {
 <header>
 	<nav>
 		<button id='get-an-image' type='button'>Get an Image</button>
+        <button id='start-timer' type='button'>Click me and wait!</button>
+        <button id='change-marker' type='button'>Change a Marker!</button>
+
 	</nav>
 </header>
 
