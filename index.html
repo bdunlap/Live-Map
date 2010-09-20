@@ -42,8 +42,10 @@ function getNext()
 	if (gallupImgs.currentIndex == gallupImgs.queue.length) {
 		return null;
 	}
-
-	return gallupImgs.queue[gallupImgs.currentIndex++];
+    
+    var Img = { URL: gallupImgs.queue[gallupImgs.currentIndex++]/*,
+                Marker: &marker*/};
+    return Img;
 }
 
 var imageCounter = 0;
@@ -69,11 +71,12 @@ function doTimer()
 
 function placeNext()
 {
-	var newUrl = getNext();
-	if (newUrl == null) {
+	var newImgObject = getNext();
+	if (newImgObject == null) {
 		alert("end of the line!");
 		return;
-}
+    }
+    var newUrl = newImgObject.URL;
 
 	/**
 	 * Create HTML code for the featured image:
