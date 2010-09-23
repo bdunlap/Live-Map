@@ -1,17 +1,20 @@
 <?php
 
-//TODO temporary
-$twitterAccounts = array("bidPrototype");
+function PollTwitter($twitterAccounts) {
 
-$photos = array();
+    //TODO temporary
+    $twitterAccounts = array("bidPrototype");
 
-foreach ($twitterAccounts as $account) {
-    $twitterResponse = getPhotoResponse($account); 
-    $photoArrayForAccount = parseResponse($twitterResponse, $account); 
-    $photos = array_merge($photos, $photoArrayForAccount);
+    $photos = array();
+
+    foreach ($twitterAccounts as $account) {
+        $twitterResponse = getPhotoResponse($account); 
+        $photoArrayForAccount = parseResponse($twitterResponse, $account); 
+        $photos = array_merge($photos, $photoArrayForAccount);
+    }
+
+    return $photos;
 }
-
-var_dump($photos);
 
 function getPhotoResponse($account)
 {
