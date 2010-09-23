@@ -48,20 +48,4 @@ function parseResponse($response, $account)
     return $images;
 }
 
-
-
-class Photo {
-    public $text;
-    public $rawData;
-    public $twitterAccount;
-    public $url;
-    
-    public function getImage()
-    {
-        $imageData = file_get_contents($this->url);
-        return $imageData;
-    }
-}
-
-
 ?>
