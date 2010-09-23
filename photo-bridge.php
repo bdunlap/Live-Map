@@ -7,10 +7,10 @@ ini_set('display_errors', 'On');
  * Invokes the Twitter poller to get new images and then "stores" them -- which
  * will either mean uploading them to a location-specific SmugMug gallery via
  * the SmugMug API, or (if we can't get a SmugMug API key in time) emailing them
- * in to the 
- * directory locally.
+ * in to the default gallery.
  */
-require './TwitterPoller.php';
+require './TwitgooPoller.php';
+require './Photo.php';
 
 $accountsToPoll = array(
     'BIDPrototype',
@@ -32,17 +32,20 @@ try {
  *
  *      <twitter account> => <SmugMug Gallery title>
  */
+define(DEFAULT_GALLERY, 'To-Be-Sorted');
 $galleryMap = array(
     'BIDPrototype' => 'BIDPrototype', // real gallery titles s/b user-friendly
 );
 
-$storage = new PhotoStorage();
-$storage->setGalleryMap($galleryMap);
-
 foreach ($photos as $photo) {
     try {
-        $storage->storePhoto($photo);
-    } catch(PhotoStorageException $e) {
+        $gallery = DEFAULT_GALLERY;
+        if (isset($galleryMap[$photo->twitterAccount])) {
+            $gallery = $galleryMap[$photo->twitterAccount];
+        }
+
+        $photo->upload($gallery);
+    } catch(PhotoException $e) {
         $logger->error("storePhoto() failed. Exception follows.\n"
             . print_r($e, 1)
         );

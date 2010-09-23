@@ -57,9 +57,14 @@ class Photo
     {
     }
 
+    /**
+     * Retrieves the raw image data at $this->url
+     *
+     * @return string
+     */
     private function _getImage()
     {
-        $imageData = file_get_contents($this->_url);
+        $imageData = file_get_contents($this->url);
         return $imageData;
     }
 }
