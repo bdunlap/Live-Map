@@ -18,15 +18,11 @@ class PhotoStorage
      */
     static public function addPhoto($photo, $location)
     {
-        if (is_null(self::$_dbh)) {
-            self::_connectToDb();
-        }
-
         $q = "
             INSERT INTO photos
             (
                 url,
-                text,
+                caption,
                 location
             )
             VALUES ( ?, ?, ? )
@@ -51,7 +47,7 @@ class PhotoStorage
         }
 
         $q = "
-            SELECT id, url, text, location
+            SELECT id, url, caption, location
             FROM photos
             WHERE seen_yet = 0
             ORDER BY id ASC
@@ -82,10 +78,6 @@ class PhotoStorage
      */
     static private function _markAsSeen($id)
     {
-        if (is_null(self::$_dbh)) {
-            self::_connectToDb();
-        }
-
         $q = "
             UPDATE photos
             SET seen_yet = 1
@@ -105,6 +97,10 @@ class PhotoStorage
      */
     static private function _changeDb($q, $params)
     {
+        if (is_null(self::$_dbh)) {
+            self::_connectToDb();
+        }
+
         $sth = self::$_dbh->prepare($q);
 
         if (!$sth) {

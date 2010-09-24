@@ -9,8 +9,11 @@ ini_set('display_errors', 'On');
  * the SmugMug API, or (if we can't get a SmugMug API key in time) emailing them
  * in to the default gallery.
  */
+require './settings.php';
+
 require './TwitgooPoller.php';
 require './Photo.php';
+require './PhotoStorage.php';
 
 $accountsToPoll = array(
     'BIDPrototype',
@@ -24,6 +27,7 @@ try {
     );
 }
 
+
 /**
  * Each Twitter account is associated with a specific gallery inside the SmugMug
  * account. Map those associations here, thus:
@@ -36,17 +40,23 @@ $galleryMap = array(
 );
 
 foreach ($photos as $photo) {
-    try {
-        $gallery = DEFAULT_GALLERY;
-        if (isset($galleryMap[$photo->twitterAccount])) {
-            $gallery = $galleryMap[$photo->twitterAccount];
-        }
+	$gallery = DEFAULT_GALLERY;
+	if (isset($galleryMap[$photo->twitterAccount])) {
+		$gallery = $galleryMap[$photo->twitterAccount];
+	}
 
-        $photo->store($gallery);
+	$photo->location = $gallery;
+
+	try {
+		$photo->store($gallery);
+		PhotoStorage::addPhoto($photo, $gallery);
     } catch(PhotoException $e) {
         $logger->error("storePhoto() failed. Exception follows.\n"
             . print_r($e, 1)
         );
+	} catch (Exception $e) {
+		echo "addPhoto() failed. Exception follows.\n";
+		print_r($e);
     }
 }
 

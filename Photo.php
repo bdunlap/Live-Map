@@ -9,9 +9,10 @@
  */
 class Photo
 {
-    public $text;
-    public $twitterAccount;
-    public $url;
+    public $text = NULL;
+    public $twitterAccount = NULL;
+    public $url = NULL;
+	public $location = NULL;
 
     /**
      * Stores a photo on SmugMug
