@@ -19,16 +19,6 @@
 
 <script type="text/javascript">
 
-var gallupImgs = {
-	queue: [
-		'http://gallupbid.smugmug.com/Other/Gallup-Murals/Fireball3448/1005392887_95WfW',
-		'http://gallupbid.smugmug.com/Other/Gallup-Murals/Mural4th66/1005392416_HNEkQ',
-		'http://gallupbid.smugmug.com/Other/Gallup-Murals/Fireball3564/1005392091_EyAYv',
-		'http://gallupbid.smugmug.com/Other/Gallup-Murals/Fireball3556/1005392015_N8TeZ',
-	],
-	currentIndex: 0
-}
-
 var c=0;
 var t;
 var timer_is_on=0;
@@ -39,13 +29,16 @@ function changeMarker()
 
 function getNext()
 {
-	if (gallupImgs.currentIndex == gallupImgs.queue.length) {
-		return null;
-	}
-    
-    var Img = { URL: gallupImgs.queue[gallupImgs.currentIndex++]/*,
-                Marker: &marker*/};
-    return Img;
+    var Img = $.ajax({
+        url: "get-next.php",
+        async: false
+        }).responseText;
+
+    var parsedImg = $.parseJSON(Img);
+
+    alert(parsedImg);
+
+   return parsedImg;
 }
 
 var imageCounter = 0;
@@ -76,7 +69,9 @@ function placeNext()
 		alert("end of the line!");
 		return;
     }
-    var newUrl = newImgObject.URL;
+    var newUrl = newImgObject.url;
+    var thumbUrl = newImgObject.thumbnailUrl;
+    alert(newUrl);
 
 	/**
 	 * Create HTML code for the featured image:
@@ -87,7 +82,7 @@ function placeNext()
 	 * end up with IDs of 'featured-0', 'featured-1', 'featured-2', etc.
 	 */
 	var featuredImg = '<img id="featured-' + imageCounter + '" '
-		            + 'src="' + newUrl + '-S.jpg" />';
+		            + 'src="' + newUrl + '" />';
 	/**
 	 * Then create HTML code for the thumbnail. This one needs to be in a div so
 	 * that we can force the divs to have uniform dimensions:
@@ -96,7 +91,7 @@ function placeNext()
 	 *       <img src="[image URL here, with 'Ti' suffix so we use SmugMug's 'Tiny' version of the photo]" />
      *   </div>
 	 */
-	var newThumb = '<img src="' + newUrl + '-Ti.jpg" />';
+	var newThumb = '<img src="' + thumbUrl + '" />';
 
 	var newThumbDiv = '<div id="thumb-' + imageCounter + '" '
 		            + 'class="thumb">' + newThumb + '</div>';
