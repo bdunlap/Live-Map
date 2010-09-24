@@ -16,10 +16,8 @@ $accountsToPoll = array(
     'BIDPrototype',
 );
 
-$poller = new TwitterPoller($accountsToPoll); // pass list of accounts here
-
 try {
-    $photos = $poller->getTwitterPhotos();
+    $photos = PollTwitter($accountsToPoll);
 } catch(TwitterPollerException $e) {
     die ("couldn't poll twitter. Exception follows.\n"
         . print_r($e, 1)
@@ -32,7 +30,7 @@ try {
  *
  *      <twitter account> => <SmugMug Gallery title>
  */
-define(DEFAULT_GALLERY, 'To-Be-Sorted');
+define('DEFAULT_GALLERY', 'To-Be-Sorted');
 $galleryMap = array(
     'BIDPrototype' => 'BIDPrototype', // real gallery titles s/b user-friendly
 );
@@ -44,7 +42,7 @@ foreach ($photos as $photo) {
             $gallery = $galleryMap[$photo->twitterAccount];
         }
 
-        $photo->upload($gallery);
+        $photo->store($gallery);
     } catch(PhotoException $e) {
         $logger->error("storePhoto() failed. Exception follows.\n"
             . print_r($e, 1)

@@ -43,7 +43,7 @@ class Photo
          * going to worry about it for now.
          */ 
         $filename = NULL;
-        $this->_upload($filename, $imageData, $text, $gallery);
+        $this->_upload($filename, $imageData, $gallery);
     }
 
     /**
@@ -53,8 +53,11 @@ class Photo
      *
      * http://www.smugmug.com/help/camera-phones
      */
-    private function _upload($filename, $imageData, $text, $gallery)
+    private function _upload($filename, $imageData, $gallery)
     {
+        $imageSize = strlen($imageData);
+        echo "Here we would upload an $imageSize-byte photo named $filename "
+           . "to the $gallery gallery, with caption [$this->text]\n";
     }
 
     /**
