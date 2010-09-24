@@ -48,7 +48,7 @@ foreach ($photos as $photo) {
 	$photo->location = $gallery;
 
 	try {
-		$photo->store($gallery);
+		SmugStore::uploadPhoto($photo, $gallery);
 		PhotoStorage::addPhoto($photo, $gallery);
     } catch(PhotoException $e) {
         $logger->error("storePhoto() failed. Exception follows.\n"
