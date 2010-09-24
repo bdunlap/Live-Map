@@ -68,7 +68,21 @@ class PhotoStorage
         $photo->text = $row['text'];
         $photo->location = $row['location'];
 
+		$idToMark = filter_var($row['id'], FILTER_VALIDATE_REGEXP,
+			array(
+				'options' => array(
+					'regexp' => '/^[0-9]+$/',
+				),
+			)
+		);
+
+		if ($idToMark === FALSE) {
+			throw new Exception("row['id'] is not a number");
+		}
+
         self::_markAsSeen($row['id']);
+
+		return $photo;
     }
 
     /**

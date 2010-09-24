@@ -1,9 +1,11 @@
 <?php
+require './settings.php';
 
-require_once 'Photo.php';
-require_once 'PhotoStorage.php';
+require './Photo.php';
+require './PhotoStorage.php';
+require './FauxLogger.php';
 
-$_logger = Logger::getLogger('GetNext');
+$_logger = Logger::getLogger('get-next');
 
 try {
     $nextPhoto = PhotoStorage::getNextUnseen();
