@@ -25,6 +25,10 @@ if (!isset($_logger)) {
     $_logger = Logger::getLogger('poll-twitter');
 }
 
+$startMsg = "BEGIN RUN: ".date('r');
+$_logger->info($startMsg);
+echo "$startMsg\n";
+
 $accountsToPoll = array(
     'BIDPrototype'
 );
@@ -73,9 +77,10 @@ foreach ($photos as $photo) {
 }
 
 $msg = "Photos uploaded: $photosUploaded\n"
-     . "Photos added to local storage: $photosAdded";
+     . "Photos added to local storage: $photosAdded\n"
+     . "END RUN: ".date('r');
 
 $_logger->info($msg);
-echo "$msg\n";
+echo "$msg\n\n";
 
 ?>
