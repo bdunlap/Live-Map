@@ -46,7 +46,7 @@ class PhotoStorage
      */
     static public function getNextUnseen()
     {
-        $photo = getPhoto(NULL);
+        $photo = self::getPhoto(NULL);
         self::markAsSeen($photo->gooId);
     }
     /**
