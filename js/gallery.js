@@ -56,8 +56,8 @@ function timedCount()
     }
 
         placeNext();
-        timeCount.counter++;
-        if (timedCount.counter < 5)
+        timedCount.counter++;
+        if (timedCount.counter < 15)
         {
             t=setTimeout("timedCount()",5000);
         }
