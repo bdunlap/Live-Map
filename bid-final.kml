@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://earth.google.com/kml/2.2">
+<Document>
+  <name>Gallup Business Improvement District</name>
+  <description><![CDATA[]]></description>
+  <Style id="style10">
+    <LineStyle>
+      <color>73FFCC33</color>
+      <width>5</width>
+    </LineStyle>
+  </Style>
+  <Style id="style2">
+    <LineStyle>
+      <color>73000000</color>
+      <width>5</width>
+    </LineStyle>
+  </Style>
+  <Style id="style12">
+    <IconStyle>
+      <Icon>
+        <href>http://maps.gstatic.com/intl/en_us/mapfiles/ms/micons/blue-dot.png</href>
+      </Icon>
+    </IconStyle>
+  </Style>
+  <Style id="style13">
+    <IconStyle>
+      <Icon>
+        <href>http://maps.gstatic.com/intl/en_us/mapfiles/ms/micons/blue-dot.png</href>
+      </Icon>
+    </IconStyle>
+  </Style>
+  <Style id="style3">
+    <IconStyle>
+      <Icon>
+        <href>http://maps.gstatic.com/intl/en_us/mapfiles/ms/micons/blue-dot.png</href>
+      </Icon>
+    </IconStyle>
+  </Style>
+  <Style id="style6">
+    <IconStyle>
+      <Icon>
+        <href>http://maps.gstatic.com/intl/en_us/mapfiles/ms/micons/red-dot.png</href>
+      </Icon>
+    </IconStyle>
+  </Style>
+  <Style id="style9">
+    <IconStyle>
+      <Icon>
+        <href>http://maps.gstatic.com/intl/en_us/mapfiles/ms/micons/ltblue-dot.png</href>
+      </Icon>
+    </IconStyle>
+  </Style>
+  <Style id="style7">
+    <IconStyle>
+      <Icon>
+        <href>http://maps.gstatic.com/intl/en_us/mapfiles/ms/micons/ltblue-dot.png</href>
+      </Icon>
+    </IconStyle>
+  </Style>
+  <Style id="style5">
+    <IconStyle>
+      <Icon>
+        <href>http://maps.gstatic.com/intl/en_us/mapfiles/ms/micons/ltblue-dot.png</href>
+      </Icon>
+    </IconStyle>
+  </Style>
+  <Style id="style1">
+    <IconStyle>
+      <Icon>
+        <href>http://maps.gstatic.com/intl/en_us/mapfiles/ms/micons/ltblue-dot.png</href>
+      </Icon>
+    </IconStyle>
+  </Style>
+  <Style id="style11">
+    <IconStyle>
+      <Icon>
+        <href>http://maps.gstatic.com/intl/en_us/mapfiles/ms/micons/ltblue-dot.png</href>
+      </Icon>
+    </IconStyle>
+  </Style>
+  <Style id="style8">
+    <IconStyle>
+      <Icon>
+        <href>http://maps.gstatic.com/intl/en_us/mapfiles/ms/micons/ltblue-dot.png</href>
+      </Icon>
+    </IconStyle>
+  </Style>
+  <Style id="style16">
+    <IconStyle>
+      <Icon>
+        <href>http://maps.gstatic.com/intl/en_us/mapfiles/ms/micons/ltblue-dot.png</href>
+      </Icon>
+    </IconStyle>
+  </Style>
+  <Style id="style14">
+    <IconStyle>
+      <Icon>
+        <href>http://maps.gstatic.com/intl/en_us/mapfiles/ms/micons/ltblue-dot.png</href>
+      </Icon>
+    </IconStyle>
+  </Style>
+  <Style id="style15">
+    <IconStyle>
+      <Icon>
+        <href>http://maps.gstatic.com/intl/en_us/mapfiles/ms/micons/ltblue-dot.png</href>
+      </Icon>
+    </IconStyle>
+  </Style>
+  <Style id="style4">
+    <IconStyle>
+      <Icon>
+        <href>http://maps.gstatic.com/intl/en_us/mapfiles/ms/micons/ltblue-dot.png</href>
+      </Icon>
+    </IconStyle>
+  </Style>
+  <Placemark>
+    <name>Business Improvement District</name>
+    <description><![CDATA[]]></description>
+    <styleUrl>#style10</styleUrl>
+    <LineString>
+      <tessellate>1</tessellate>
+      <coordinates>
+        -108.755852,35.523846,0.000000
+        -108.753639,35.523979,0.000000
+        -108.753609,35.522739,0.000000
+        -108.751060,35.522720,0.000000
+        -108.750908,35.523720,0.000000
+        -108.746231,35.525200,0.000000
+        -108.745796,35.524281,0.000000
+        -108.736320,35.527119,0.000000
+        -108.736748,35.528069,0.000000
+        -108.737839,35.527729,0.000000
+        -108.738419,35.529011,0.000000
+        -108.737350,35.529362,0.000000
+        -108.737587,35.529850,0.000000
+        -108.749107,35.526249,0.000000
+        -108.750458,35.525520,0.000000
+        -108.753273,35.524769,0.000000
+        -108.754578,35.524330,0.000000
+        -108.755028,35.524078,0.000000
+        -108.755630,35.523979,0.000000
+        -108.755180,35.523869,0.000000
+      </coordinates>
+    </LineString>
+  </Placemark>
+  <Placemark>
+    <name>Gallup Cultural Center</name>
+    <description><![CDATA[]]></description>
+    <styleUrl>#style2</styleUrl>
+    <LineString>
+      <tessellate>1</tessellate>
+      <coordinates>
+        -108.741859,35.528545,0.000000
+        -108.742096,35.529041,0.000000
+        -108.738785,35.530010,0.000000
+        -108.738533,35.529541,0.000000
+      </coordinates>
+    </LineString>
+  </Placemark>
+  <Placemark>
+    <name>Mission A2 - First American Traders</name>
+    <description><![CDATA[]]></description>
+    <styleUrl>#style12</styleUrl>
+    <Point>
+      <coordinates>-108.740700,35.528454,0.000000</coordinates>
+    </Point>
+  </Placemark>
+  <Placemark>
+    <name>Missions F1 and F2 - Statues</name>
+    <description><![CDATA[]]></description>
+    <styleUrl>#style13</styleUrl>
+    <Point>
+      <coordinates>-108.741005,35.528942,0.000000</coordinates>
+    </Point>
+  </Placemark>
+  <Placemark>
+    <name>Mission G - Painted Horse Sculpture</name>
+    <description><![CDATA[]]></description>
+    <styleUrl>#style3</styleUrl>
+    <Point>
+      <coordinates>-108.740059,35.529415,0.000000</coordinates>
+    </Point>
+  </Placemark>
+  <Placemark>
+    <name>Gallup BID New Media Command Center</name>
+    <description><![CDATA[]]></description>
+    <styleUrl>#style6</styleUrl>
+    <Point>
+      <coordinates>-108.742569,35.525871,0.000000</coordinates>
+    </Point>
+  </Placemark>
+  <Placemark>
+    <name>Gallup Community Life Mural</name>
+    <description><![CDATA[<i>Eric Leon Sarracino, Artist</i><div><br>&nbsp;</div>]]></description>
+    <styleUrl>#style9</styleUrl>
+    <Point>
+      <coordinates>-108.742310,35.526516,0.000000</coordinates>
+    </Point>
+  </Placemark>
+  <Placemark>
+    <name>Great Gallup Mural</name>
+    <description><![CDATA[<i>Paul Newman, Artist</i><div>"...Most of the history of a community takes place in the residents' daily lives, for instance, where they work and, importantly, their environment. &nbsp;We chose to emphasize five broad themes - the landscape, railroads, Highway 66, rodeos, western life and coal mining."</div>]]></description>
+    <styleUrl>#style7</styleUrl>
+    <Point>
+      <coordinates>-108.741966,35.526585,0.000000</coordinates>
+    </Point>
+  </Placemark>
+  <Placemark>
+    <name>Zuni Mural</name>
+    <description><![CDATA[<i>Geddy Epaloose, Artist</i><div>"The story line reads from south to north like the road from Zuni to Gallup and shows how Zunis from their world and their beginnings have brought Zuni traditions, culture, religion and history into this new world and Gallup..."</div>]]></description>
+    <styleUrl>#style5</styleUrl>
+    <Point>
+      <coordinates>-108.741928,35.525433,0.000000</coordinates>
+    </Point>
+  </Placemark>
+  <Placemark>
+    <name>Long Walk Home Mural</name>
+    <description><![CDATA[<i>Richard K. Yazzie, Artist</i><div>In 1864... thousands of Navajo people were forcibly marched from Canyon de Chelly... to Fort Sumner four hundred miles away. &nbsp;Eventually 7,000 Navajo were imprisoned there. &nbsp;The captives suffered four yeas of deplorable conditions... until it no longer became feasible to hold them. &nbsp;The Peace Treaty of 1868 was signed and the Navajo were released.</div>]]></description>
+    <styleUrl>#style1</styleUrl>
+    <Point>
+      <coordinates>-108.743729,35.525013,0.000000</coordinates>
+    </Point>
+  </Placemark>
+  <Placemark>
+    <name>Veteran&#39;s Mural</name>
+    <description><![CDATA[<i>Jerry Brown, Artist</i>]]></description>
+    <styleUrl>#style11</styleUrl>
+    <Point>
+      <coordinates>-108.743103,35.525311,0.000000</coordinates>
+    </Point>
+  </Placemark>
+  <Placemark>
+    <name>Women&#39;s Multi-Cultural Mural</name>
+    <description><![CDATA[<i>Erica Rae Sykes, Artist</i><div>We offer a tribute to the women who have carried on the traditions of daily life of their own cultures...The large symbolic storyteller at the left of the mural pays homage to women who have kept multi-cultural memories alive by telling stories of the past.</div>]]></description>
+    <styleUrl>#style8</styleUrl>
+    <Point>
+      <coordinates>-108.742783,35.526375,0.000000</coordinates>
+    </Point>
+  </Placemark>
+  <Placemark>
+    <name>Native American Trading Mural</name>
+    <description><![CDATA[<i>Chester Kahn, Artist</i><div>In the 1920s there was an awakening appreciation for Native American art supported and encouraged by numerous traders. &nbsp;As tribes sought self-sufficiency in the 1960s trading on the reservation decreased... Many traders settled in Gallup where they are major supporters of Native American artisans.</div>]]></description>
+    <styleUrl>#style16</styleUrl>
+    <Point>
+      <coordinates>-108.744202,35.526585,0.000000</coordinates>
+    </Point>
+  </Placemark>
+  <Placemark>
+    <name>Coal Mining Era Mural</name>
+    <description><![CDATA[<i>Andrew Butler, Artist</i><div>The 1935 Gallup Riot took place along this alley during which Sheriff Carmichael was killed. &nbsp;Depicted are a Navajo rail crew, legendary for their speed, the McKinley strip mine on the Navajo Reservation, the Gamerco Electric Generating Plant, coal competitions on days off, and the McGaffey timber industry nearby supplying the mines with structural materials.</div>]]></description>
+    <styleUrl>#style14</styleUrl>
+    <Point>
+      <coordinates>-108.743256,35.526604,0.000000</coordinates>
+    </Point>
+  </Placemark>
+  <Placemark>
+    <name>Gallup Inter-Tribal Indian Ceremonial Mural</name>
+    <description><![CDATA[<i>Irving Bahe, Artist</i><div>"This mural is about unity and life... The rainbow has all the colors so it represents all the Indian tribes that are in the world. &nbsp;Also the rainbow is carrying the songs to the dancers. &nbsp;Native Americans celebrate life through song and dance...that's what dance is about; to celebrate life."</div>]]></description>
+    <styleUrl>#style15</styleUrl>
+    <Point>
+      <coordinates>-108.742912,35.527214,0.000000</coordinates>
+    </Point>
+  </Placemark>
+  <Placemark>
+    <name>Navajo Code Talkers&#39; Mural</name>
+    <description><![CDATA[<i>Be Sargent, Artist</i><div>"The first 29 Code Talkers devised the Navajo Code. &nbsp;Part of the code was an alphabet which was used to spell words like names of strategic places. &nbsp;The mural depicts the code being passed on to the children of the Code Talkers symbolizing the perpetuation of the Navajo language."</div>]]></description>
+    <styleUrl>#style4</styleUrl>
+    <Point>
+      <coordinates>-108.742592,35.527512,0.000000</coordinates>
+    </Point>
+  </Placemark>
+</Document>
+</kml>
