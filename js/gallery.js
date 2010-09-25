@@ -15,9 +15,19 @@ function getNext()
 
     var parsedImg = $.parseJSON(Img);
 
-    alert(parsedImg);
+    //check parsed image status
+    if(parsedImg.status == "FAIL") {
+    //do something with failed response
 
-   return parsedImg;
+    } else if (parsedImg.status == "EMPTY") {
+        //do something with empty response
+
+    } else if (parsedImg.status == "SUCCESS") {
+        //response is good
+        alert(parsedImg);
+
+        return parsedImg;
+    }
 }
 
 var imageCounter = 0;
@@ -81,7 +91,7 @@ function placeNext()
 		 * featured image, before adding a new one, and show the current
 		 * thumbnail (before adding a new one).
 		 */
-		$('#featured-' + (imageCounter - 1)).hide();
+		$('#featured-' + (imageCounter - 1)).remove();
 		$('#thumb-' + (imageCounter -1)).show();
 	}
 
