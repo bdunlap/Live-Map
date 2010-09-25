@@ -14,7 +14,7 @@ function getNext()
     }
 
     var Img = $.ajax({
-        url: 'server-side/get-next.php?id=' + getNext.counter++,
+        url: 'server-side/get-next.php?id=' + getNext.counter,
         async: false
         }).responseText;
 
@@ -28,8 +28,9 @@ function getNext()
 
     } else if (parsedImg.status == "SUCCESS") {
         //response is good
-
         console.log(parsedImg);
+
+        getNext.counter++;
 
         return parsedImg;
     }
