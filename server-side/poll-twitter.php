@@ -16,20 +16,27 @@ require './classes/Photo.php';
 require './classes/PhotoStorage.php';
 require './classes/SmugStore.php';
 
+/**
+ * Log4PHP setup
+ */
+require_once("log4php/Logger.php"); 
+Logger::configure('log4php.properties'); 
+
+if (!isset($_logger)) {
+    $_logger = Logger::getLogger('poll-twitter');
+}
+
 $accountsToPoll = array(
-    'BIDPrototype',
+    'BIDPrototype'
 );
 
 try {
     $photos = TwitgooPoller::PollTwitter($accountsToPoll);
-} catch(TwitterPollerException $e) {
-    die ("couldn't poll twitter. Exception follows.\n"
+} catch(TwitgooException $e) {
+    die ("Couldn't poll twitter. Exception follows.\n"
         . print_r($e, 1)
     );
 }
-
-// TODO remove; debugging
-print_r($photos); exit;
 
 /**
  * Each Twitter account is associated with a specific gallery inside the SmugMug
@@ -54,7 +61,7 @@ foreach ($photos as $photo) {
 		SmugStore::uploadPhoto($photo, $gallery);
 		PhotoStorage::addPhoto($photo, $gallery);
     } catch(PhotoException $e) {
-        $logger->error("storePhoto() failed. Exception follows.\n"
+        $_logger->error("storePhoto() failed. Exception follows.\n"
             . print_r($e, 1)
         );
 	} catch (Exception $e) {
