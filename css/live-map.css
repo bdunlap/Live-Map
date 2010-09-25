@@ -15,10 +15,6 @@ section {
 }
 
 #photos {
-	margin-left: 10px;
-}
-
-#photos {
 	width: 470px;
 }
 
@@ -36,6 +32,7 @@ section {
                     *  480 x 300 is roughly the golden ratio; we need 20 more
                     *  pixels to maximize featured-photo size
                     */
+	margin-left: 10px;
 }
 
 #featured {
