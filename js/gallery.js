@@ -9,7 +9,7 @@ function changeMarker()
 function getNext()
 {
     var Img = $.ajax({
-        url: "get-next.php",
+        url: "server-side/get-next.php",
         async: false
         }).responseText;
 
