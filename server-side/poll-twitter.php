@@ -71,6 +71,7 @@ foreach ($photos as $photo) {
 	try {
 		PhotoStorage::addPhoto($photo, $gallery);
 		$photosAdded++;
+		$_logger->info("addPhoto() succeeded, photosAdded = [$photosAdded]");
 	} catch (Exception $e) {
         $_logger->error("addPhoto() failed with [{$e->getMessage()}]");
     }
