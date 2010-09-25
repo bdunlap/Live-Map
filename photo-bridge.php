@@ -9,7 +9,7 @@ ini_set('display_errors', 'On');
  * the SmugMug API, or (if we can't get a SmugMug API key in time) emailing them
  * in to the default gallery.
  */
-require './settings.php';
+include './settings.php';
 
 require './TwitgooPoller.php';
 require './Photo.php';

@@ -1,5 +1,5 @@
 <?php
-require './settings.php';
+include './settings.php';
 
 require './Photo.php';
 require './PhotoStorage.php';
