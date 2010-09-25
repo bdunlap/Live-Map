@@ -12,7 +12,6 @@ header {
 section {
 	display: block;
 	float: left;
-	height: 500px;
 }
 
 section+section {
@@ -20,20 +19,28 @@ section+section {
 }
 
 #photos {
-	width: 320px;
+	width: 470px;
 }
 
 #featured img {
-	max-width: 470px;
+	max-width: 470px; /**
+                       * this will yield a max-height of ~313px if we are using
+                       * SmugMug's 'Medium' size (max 600x400).
+                       */
+
 }
 
 #map-canvas {
 	width: 480px;
+    height: 320px; /** 
+                    *  480 x 300 is roughly the golden ratio; we need 20 more
+                    *  pixels to maximize featured-photo size
+                    */
 }
 
 #featured {
-	height: 260px;
-	margin-bottom: 60px;
+	height: 320px;
+	margin-bottom: 20px;
 }
 
 #thumbnails .thumb {
