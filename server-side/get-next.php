@@ -48,6 +48,7 @@ function encodeData($nextPhoto)
 {
     $relevantData  = array( "status" => "SUCCESS",
                             "url" => $nextPhoto->url,
+                            "thumbnailUrl" => $nextPhoto->thumbnailUrl,
                             "text" => $nextPhoto->text,
                             "location" => $nextPhoto->location
                           );
