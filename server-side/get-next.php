@@ -3,7 +3,7 @@ include './settings.php';
 
 require './classes/Photo.php';
 require './classes/PhotoStorage.php';
-require './classes/FauxLogger.php';
+require './log4php/Logger.php';
 
 $_logger = Logger::getLogger('get-next');
 
