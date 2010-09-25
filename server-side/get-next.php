@@ -1,4 +1,5 @@
 <?php
+error_reporting(-1);
 include './settings.php';
 
 require './classes/Photo.php';
