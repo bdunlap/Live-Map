@@ -55,6 +55,8 @@ class TwitgooPoller
             //get text and URL
             $text = strval($media->text); 
             $imageUrl = strval($media->imageurl);
+			$thumbnailUrl = strval($media->thumburl);
+			$gooId = strval($media->mediaid);
 
             $imgObj = new Photo();
 
@@ -62,6 +64,8 @@ class TwitgooPoller
             $imgObj->text = $text;
             $imgObj->twitterAccount = $account;
             $imgObj->url = $imageUrl;
+			$imgObj->thumbnailUrl = $thumbnailUrl;
+			$imgObj->gooId = $gooId;
 
             $images[] = $imgObj;
         }

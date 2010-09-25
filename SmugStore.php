@@ -23,8 +23,11 @@ class SmugStore
      * @throws SmugException
      * @throws Exception
      */
-    public function uploadPhoto($photo, $gallery)
+    static public function uploadPhoto($photo, $gallery)
     {
+		echo "here we would upload [$photo->url] to SmugMug\n";
+		return;
+
         $imageData = file_get_contents($photo->url);
         if (!$imageData) {
             throw new Exception(__FUNCTION__ . ": couldn't download file "

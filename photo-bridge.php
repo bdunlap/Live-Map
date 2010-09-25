@@ -14,6 +14,7 @@ require './settings.php';
 require './TwitgooPoller.php';
 require './Photo.php';
 require './PhotoStorage.php';
+require './SmugStore.php';
 
 $accountsToPoll = array(
     'BIDPrototype',
