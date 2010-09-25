@@ -1,4 +1,3 @@
-var c=0;
 var t;
 var timer_is_on=0;
 
@@ -8,35 +7,48 @@ function changeMarker()
 
 function getNext()
 {
+    // Check to see if the counter has been initialized
+    if ( typeof getNext.counter == 'undefined' ) {
+        // It has not... perform the initilization
+        getNext.counter = 0;
+    }
+
     var Img = $.ajax({
-        url: "server-side/get-next.php",
+        url: 'server-side/get-next.php?id=' + getNext.counter++,
         async: false
         }).responseText;
 
     var parsedImg = $.parseJSON(Img);
-
     //check parsed image status
     if(parsedImg.status == "FAIL") {
-    //do something with failed response
+        //do something with failed response
 
     } else if (parsedImg.status == "EMPTY") {
         //do something with empty response
 
     } else if (parsedImg.status == "SUCCESS") {
         //response is good
-        alert(parsedImg);
+
+        console.log(parsedImg);
 
         return parsedImg;
     }
 }
 
 var imageCounter = 0;
+var maxThumbnails = 8;
 
 function timedCount()
 {
+    // Check to see if the counter has been initialized
+    if ( typeof timedCount.counter == 'undefined' ) {
+        // It has not... perform the initilization
+        timedCount.counter = 0;
+    }
+
         placeNext();
-        c=c+1;
-        if (c < 5)
+        timeCount.counter++;
+        if (timedCount.counter < 5)
         {
             t=setTimeout("timedCount()",5000);
         }
@@ -55,12 +67,12 @@ function placeNext()
 {
 	var newImgObject = getNext();
 	if (newImgObject == null) {
-		alert("end of the line!");
+		console.log("All photos in database are currently being displayed.");
 		return;
     }
     var newUrl = newImgObject.url;
     var thumbUrl = newImgObject.thumbnailUrl;
-    alert(newUrl);
+    console.log(newUrl);
 
 	/**
 	 * Create HTML code for the featured image:
@@ -95,6 +107,10 @@ function placeNext()
 		$('#thumb-' + (imageCounter -1)).show();
 	}
 
+    //remove oldest thumbnail once we get to a predetermined limit
+    if (imageCounter > maxThumbnails) {
+        $('#thumb-' + (imageCounter - (maxThumbnails + 1))).remove();
+    }
 	imageCounter++;
 
 	/**
