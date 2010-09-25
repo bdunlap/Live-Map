@@ -11,10 +11,10 @@ ini_set('display_errors', 'On');
  */
 include './settings.php';
 
-require './TwitgooPoller.php';
-require './Photo.php';
-require './PhotoStorage.php';
-require './SmugStore.php';
+require './classes/TwitgooPoller.php';
+require './classes/Photo.php';
+require './classes/PhotoStorage.php';
+require './classes/SmugStore.php';
 
 $accountsToPoll = array(
     'BIDPrototype',

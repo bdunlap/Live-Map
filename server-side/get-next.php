@@ -1,9 +1,9 @@
 <?php
 include './settings.php';
 
-require './Photo.php';
-require './PhotoStorage.php';
-require './FauxLogger.php';
+require './classes/Photo.php';
+require './classes/PhotoStorage.php';
+require './classes/FauxLogger.php';
 
 $_logger = Logger::getLogger('get-next');
 
