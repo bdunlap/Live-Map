@@ -124,7 +124,7 @@ class PhotoStorage
      */
     static public function markAsSeen($gooId)
     {
-		$idToMark = filter_var($id, FILTER_VALIDATE_REGEXP,
+		$idToMark = filter_var($gooId, FILTER_VALIDATE_REGEXP,
 			array(
 				'options' => array(
 					'regexp' => '/^[a-z0-9]{1,12}$/i',
@@ -133,7 +133,7 @@ class PhotoStorage
 		);
 
 		if ($idToMark === FALSE) {
-			throw new Exception(__FUNCTION__ . ": passed a non-number");
+			throw new Exception(__FUNCTION__ . ": passed an invalid goo-ID");
 		}
 
         $q = "
