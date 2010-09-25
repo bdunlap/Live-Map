@@ -19,19 +19,30 @@ class TwitgooPoller
         // grab the global logger
         global $_logger;
         $photos = array();
-
-        try {
-            foreach ($twitterAccounts as $account) {
+        $error = FALSE;
+        
+        foreach ($twitterAccounts as $account) {
+            try {
                 $twitterResponse = self::_getPhotoResponse($account);
                 $photoArrayForAccount = self::_parseResponse($twitterResponse, $account);
                 $photos = array_merge($photos, $photoArrayForAccount);
+            } catch (TwitgooException $e) {
+                // log, continue if possible
+                $_logger->error("Encountered an error polling twitter for photos "
+                    ."from '$account'. Trying next account.", $e);
+                $error = TRUE;
+                continue;
             }
-        } catch (TwitgooException $e) {
-            // log, re-throw
-            $_logger->error("Encountered an error polling twitter for photos.", $e);
-            throw $e;
         }
 
+        if($error === TRUE && empty($photos)) {
+            // at least 1 account errored out, AND
+            // there are no results from any account(s)
+            $_logger->error("Error(s) encountered, and no results found, from "
+                ."any of the Twitter accounts in '$twitterAccounts'.");
+            throw new TwitgooException("All Twitter accounts failed polling for photos.");
+        }
+        
         return $photos;
     }
 
