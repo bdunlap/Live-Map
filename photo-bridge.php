@@ -20,13 +20,12 @@ $accountsToPoll = array(
 );
 
 try {
-    $photos = PollTwitter($accountsToPoll);
+    $photos = TwitgooPoller::PollTwitter($accountsToPoll);
 } catch(TwitterPollerException $e) {
     die ("couldn't poll twitter. Exception follows.\n"
         . print_r($e, 1)
     );
 }
-
 
 /**
  * Each Twitter account is associated with a specific gallery inside the SmugMug
