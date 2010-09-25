@@ -14,7 +14,7 @@ function getNext()
     }
 
     var Img = $.ajax({
-        url: 'server-side/get-next.php?id=' + getNext.counter++,
+        url: 'server-side/get-next.php?id=' + getNext.counter,
         async: false
         }).responseText;
 
@@ -38,6 +38,8 @@ function getNext()
         $('#server-status').text(parsedImg.status);
 
         console.log(parsedImg);
+
+        getNext.counter++;
 
         return parsedImg;
     }
