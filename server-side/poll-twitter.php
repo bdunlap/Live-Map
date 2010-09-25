@@ -1,6 +1,5 @@
 <?php
 error_reporting(-1);
-ini_set('display_errors', 'On');
 /**
  * @package Live-Map
  *
@@ -49,6 +48,7 @@ $galleryMap = array(
     'BIDPrototype' => 'BIDPrototype', // real gallery titles s/b user-friendly
 );
 
+$photosAdded = $photosUploaded = 0;
 foreach ($photos as $photo) {
 	$gallery = DEFAULT_GALLERY;
 	if (isset($galleryMap[$photo->twitterAccount])) {
@@ -59,15 +59,23 @@ foreach ($photos as $photo) {
 
 	try {
 		SmugStore::uploadPhoto($photo, $gallery);
+		$photosUploaded++;
+    } catch(Exception $e) {
+        $_logger->error("uploadPhoto() failed with [{$e->getMessage()}]");
+	}
+
+	try {
 		PhotoStorage::addPhoto($photo, $gallery);
-    } catch(PhotoException $e) {
-        $_logger->error("storePhoto() failed. Exception follows.\n"
-            . print_r($e, 1)
-        );
+		$photosAdded++;
 	} catch (Exception $e) {
-		echo "addPhoto() failed. Exception follows.\n";
-		print_r($e);
+        $_logger->error("addPhoto() failed with [{$e->getMessage()}]");
     }
 }
+
+$msg = "Photos uploaded: $photosUploaded\n"
+     . "Photos added to local storage: $photosAdded";
+
+$_logger->info($msg);
+echo "$msg\n";
 
 ?>
