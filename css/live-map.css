@@ -1,13 +1,5 @@
-#uber-canvas {
-	background: url('css/grid.jpg') no-repeat 0 0;
-	width: 1900px;
-	height: 1300px;
-	padding: 0;
-	margin: 0 auto;
-}
-
 #canvas {
-	width: 1004px;
+	width: 960px;
 	padding: 0 10px;
 	margin: 0 auto;
 }
@@ -24,7 +16,7 @@ section {
 }
 
 section+section {
-	margin-left: 22px;
+	margin-left: 10px;
 }
 
 #photos {
@@ -32,11 +24,11 @@ section+section {
 }
 
 #featured img {
-	max-width: 320px;
+	max-width: 470px;
 }
 
 #map-canvas {
-	width: 662px;
+	width: 480px;
 }
 
 #featured {
@@ -50,4 +42,5 @@ section+section {
 	width: 100px;
 	height: 100px;
 	margin: 0 10px 10px 0;
+	overflow: hidden;;
 }
