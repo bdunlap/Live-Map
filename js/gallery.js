@@ -20,20 +20,30 @@ function getNext()
 
     var parsedImg = $.parseJSON(Img);
     //check parsed image status
-    if(parsedImg.status == "FAIL") {
+    
+    if(parsedImg.status === "FAIL") {
         //do something with failed response
+        $('#server-status').text(parsedImg.status);
 
-    } else if (parsedImg.status == "EMPTY") {
+        return null;
+
+    } else if (parsedImg.status === "EMPTY") {
         //do something with empty response
+        $('#server-status').text(parsedImg.status);
 
-    } else if (parsedImg.status == "SUCCESS") {
+        return null;
+
+    } else if (parsedImg.status === "SUCCESS") {
         //response is good
+        $('#server-status').text(parsedImg.status);
+
         console.log(parsedImg);
 
         getNext.counter++;
 
         return parsedImg;
     }
+
 }
 
 var imageCounter = 0;
@@ -48,8 +58,8 @@ function timedCount()
     }
 
         placeNext();
-        timeCount.counter++;
-        if (timedCount.counter < 5)
+        timedCount.counter++;
+        if (timedCount.counter < 15)
         {
             t=setTimeout("timedCount()",5000);
         }
@@ -67,8 +77,8 @@ function doTimer()
 function placeNext()
 {
 	var newImgObject = getNext();
-	if (newImgObject == null) {
-		console.log("All photos in database are currently being displayed.");
+	if (newImgObject === null) {
+		console.log("getNext() returned null.");
 		return;
     }
     var newUrl = newImgObject.url;
