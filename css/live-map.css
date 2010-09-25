@@ -14,7 +14,7 @@ section {
 	float: left;
 }
 
-section+section {
+#photos {
 	margin-left: 10px;
 }
 
@@ -41,6 +41,13 @@ section+section {
 #featured {
 	height: 320px;
 	margin-bottom: 20px;
+    overflow: hidden;
+}
+
+#thumbnails {
+    float: none;
+    clear: both;
+    height: 120px;
 }
 
 #thumbnails .thumb {
@@ -49,5 +56,5 @@ section+section {
 	width: 100px;
 	height: 100px;
 	margin: 0 10px 10px 0;
-	overflow: hidden;;
+	overflow: hidden;
 }
