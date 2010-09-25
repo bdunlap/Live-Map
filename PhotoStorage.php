@@ -22,16 +22,20 @@ class PhotoStorage
             INSERT INTO photos
             (
                 url,
+                thumbnail_url,
                 caption,
-                location
+                location,
+                goo_id
             )
-            VALUES ( ?, ?, ? )
+            VALUES ( ?, ?, ?, ?, ? )
         ";
 
         $params = array(
             $photo->url,
+            $photo->thumbnailUrl,
             $photo->text,
-            $location,
+            $photo->location,
+            $photo->gooId,
         );
             
         self::_changeDb($q, $params);
@@ -42,19 +46,58 @@ class PhotoStorage
      */
     static public function getNextUnseen()
     {
+        $photo = getPhoto(NULL);
+        self::markAsSeen($photo->gooId);
+    }
+    /**
+     * @return Photo
+     */
+    static public function getPhoto($id = NULL)
+    {
         if (is_null(self::$_dbh)) {
             self::_connectToDb();
         }
 
+        $params = array();
         $q = "
-            SELECT id, url, caption, location
+            SELECT goo_id, url, thumbnail_url, caption, location
             FROM photos
-            WHERE seen_yet = 0
-            ORDER BY id ASC
-            LIMIT 1
         ";
 
-        $sth = self::$_dbh->query($q);
+        if (is_null($id)) {
+            $q .= "
+                WHERE seen_yet = 0
+                ORDER BY id ASC
+                LIMIT 1
+            ";
+        } else {
+            $q .= "
+                WHERE id = ?
+            ";
+            $params[] = $id;
+        }
+
+        $sth = self::$_dbh->prepare($q);
+        if (!$sth) {
+            $errorInfo = self::$_dbh->errorInfo();
+            error_log(__FUNCTION__.": PDO's prepare() "
+                . " returned error [{$errorInfo[2]}]. Query follows.\n"
+                . $q
+            );
+
+            throw new Exception("Database-prepare error [read operation]");
+        }
+
+        if (!$sth->execute($params)) {
+            $errorInfo = self::$_dbh->errorInfo();
+            error_log(__FUNCTION__.": PDO's execute() "
+                . " returned error [{$errorInfo[2]}]. Query follows.\n"
+                . "[$q], parameters: "
+                . '[' . implode("],[", $params) . ']'
+            );
+
+            throw new Exception("Database-execute error [read operation]");
+        }
 
         $row = $sth->fetch(PDO::FETCH_ASSOC);
 
@@ -65,22 +108,10 @@ class PhotoStorage
         $photo = new Photo();
 
         $photo->url = $row['url'];
+        $photo->thumbnailUrl = $row['thumbnail_url'];
         $photo->text = $row['text'];
         $photo->location = $row['location'];
-
-		$idToMark = filter_var($row['id'], FILTER_VALIDATE_REGEXP,
-			array(
-				'options' => array(
-					'regexp' => '/^[0-9]+$/',
-				),
-			)
-		);
-
-		if ($idToMark === FALSE) {
-			throw new Exception("row['id'] is not a number");
-		}
-
-        self::_markAsSeen($row['id']);
+        $photo->gooId = $row['goo_id'];
 
 		return $photo;
     }
@@ -88,17 +119,30 @@ class PhotoStorage
     /**
      * @param string
      *
+     * @throws Exception If validation of 'gooId' fails
      * @throws Exception Bubbles up from _changeDb()
      */
-    static private function _markAsSeen($id)
+    static public function markAsSeen($gooId)
     {
+		$idToMark = filter_var($id, FILTER_VALIDATE_REGEXP,
+			array(
+				'options' => array(
+					'regexp' => '/^[a-z0-9]{1,12}$/i',
+				),
+			)
+		);
+
+		if ($idToMark === FALSE) {
+			throw new Exception(__FUNCTION__ . ": passed a non-number");
+		}
+
         $q = "
             UPDATE photos
             SET seen_yet = 1
-            WHERE id = ?
+            WHERE goo_id = ?
         ";
 
-        $params= array ( $id );
+        $params= array ( $idToMark );
 
         self::_changeDb($q, $params);
     }
@@ -107,7 +151,7 @@ class PhotoStorage
      * Executes a "write" query on $_dbh
      *
      * @param string
-     * @param 
+     * @param array
      */
     static private function _changeDb($q, $params)
     {

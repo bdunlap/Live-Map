@@ -11,9 +11,12 @@ class Photo
 {
     public $text = NULL;
     public $twitterAccount = NULL;
+
     public $url = NULL;
     public $thumbnailUrl = NULL;
+
 	public $location = NULL;
+    public $gooId = NULL;
 }
 
 ?>
