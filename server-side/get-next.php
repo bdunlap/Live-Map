@@ -20,16 +20,18 @@ if (!isset($_logger)) {
 $photoId = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT,
     array(
         'options' => array(
-            'min_range' => 0,
+            'min_range' => 1,
             'max_range' => 5000,
         ),
     )
 );
 
 try {
-    if ($photoId !== FALSE) {
+    if ($photoId !== FALSE && !empty($photoId)) {
+		$_logger->info("will attempt to get photo $photoId");
         $nextPhoto = PhotoStorage::getPhoto($photoId);
     } else {
+		$_logger->info("will attempt to get next unseen");
         $nextPhoto = PhotoStorage::getNextUnseen();
     }
 

@@ -6,12 +6,12 @@ function getNext()
 {
     // Check to see if the counter has been initialized
     if ( typeof getNext.counter == 'undefined' ) {
-        // It has not... perform the initilization
+        // It has not... perform the initialization
         getNext.counter = 1;
     }
 
     var Img = $.ajax({
-        url: 'server-side/get-next.php?id=' + getNext.counter,
+        url: 'server-side/get-next.php',
         async: false
         }).responseText;
 
@@ -33,8 +33,7 @@ function getNext()
     } else if (parsedImg.status === "SUCCESS") {
         //response is good
         $('#server-status').text(parsedImg.status);
-
-        console.log(parsedImg);
+		$('#photo-counter').text(getNext.counter);
 
         getNext.counter++;
 
@@ -44,7 +43,7 @@ function getNext()
 }
 
 var imageCounter = 0;
-var maxThumbnails = 6;
+var maxThumbnails = 16;
 
 function timedCount()
 {

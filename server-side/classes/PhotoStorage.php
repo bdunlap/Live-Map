@@ -95,8 +95,12 @@ class PhotoStorage
      */
     static public function getNextUnseen()
     {
+		global $_logger;
         $photo = self::getPhoto(NULL);
-        self::markAsSeen($photo->gooId);
+		if (!is_null($photo)) {
+			$_logger->info("marking photo $photo->gooId as seen");
+			self::markAsSeen($photo->gooId);
+		}
 
         return $photo;
     }
