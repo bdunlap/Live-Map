@@ -9,8 +9,19 @@ class PhotoStorage
 {
     static $_dbh = NULL;
 
+	/**
+	 * Checks for photo with $photo->gooId in our local db
+	 *
+	 * @return bool
+	 */
     static public function photoExists($photo)
     {
+		global $_logger;
+
+        if (is_null(self::$_dbh)) {
+            self::_connectToDb();
+        }
+
         $q = "
             SELECT id FROM photos
             WHERE goo_id = ?

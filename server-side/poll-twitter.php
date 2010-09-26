@@ -88,6 +88,7 @@ $galleryIds = array(
     'Long_Walk_Home_Mural' => '13923595',
 );
 
+$_logger->info(count($photos) . " photos to upload/store");
 $photosAdded = $photosUploaded = 0;
 foreach ($photos as $photo) {
 	$location = "unknown";
@@ -102,10 +103,13 @@ foreach ($photos as $photo) {
 	}
 
 
+	$_logger->info("checking for photo $photo->gooId");
     if (PhotoStorage::photoExists($photo)) {
         $_logger->info("we already have photo {$photo->gooId}; skipping");
         continue;
     }
+
+	$_logger->info("photo $photo->gooId doesn't exist yet");
 
 	try {
 		$_logger->info("about to upload photo {$photo->gooId} to SmugMug gallery $gallery");
