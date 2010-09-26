@@ -42,7 +42,7 @@ section {
 #thumbnails {
     float: none;
     clear: both;
-    height: 220px;
+    height: 230px;
 }
 
 #thumbnails .thumb {
@@ -50,11 +50,12 @@ section {
 	float: left;
 	width: 100px;
 	height: 100px;
-	margin: 0 20px 10px 0;
+	margin: 0 20px 20px 0;
 	overflow: hidden;
 }
 
 .location-attribution {
+	padding-top: 0.5em;
 	font-size: 0.75em;
 	font-style: italic;
 }

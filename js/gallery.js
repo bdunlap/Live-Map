@@ -138,7 +138,11 @@ function placeNext()
 		placeNext.infoWindow = new google.maps.InfoWindow();
     }
 
-	placeNext.infoWindow.setContent("<p>" + caption + "</p><p class='location-attribution'>from " + locationId + "</p>");
+	var underscoreKiller = /_/g;
+	var missionFixer = /Mission ([A-Z][0-9]?)/;
+	var noUnderscores = locationId.replace(underscoreKiller, ' ');
+	var locationName = noUnderscores.replace(missionFixer, 'Mission $1:');
+	placeNext.infoWindow.setContent("<p>" + caption + "</p><p class='location-attribution'>from " + locationName + "</p>");
 	placeNext.infoWindow.open(map, markers[locationId]);
 }
 
