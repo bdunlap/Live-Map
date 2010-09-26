@@ -18,28 +18,37 @@ class SmugStore
      *  - call _upload()
      *
 	 * @param Photo
-     * @param string $gallery
+     * @param int $albumId
      *
      * @throws SmugException
      * @throws Exception
      */
-    static public function uploadPhoto($photo, $gallery)
+    static public function uploadPhoto($photo, $albumId)
     {
-		throw new Exception("here we would upload [$photo->url] to SmugMug");
-
+        // grab the global log4php instance
+        global $_logger, $settings;
+        
         $imageData = file_get_contents($photo->url);
         if (!$imageData) {
             throw new Exception(__FUNCTION__ . ": couldn't download file "
 				. " at [$photo->url]");
         }
-        /**
-         * TODO set a filename for SmugMug? If so, just use the gooId because we
-         * know that's unique.
-         *
-         * It's not necessary if we are just emailing photos in, so I'm not
-         * going to worry about it for now.
-         */ 
-        $filename = NULL;
+        
+        $smugMugSvc = new phpSmug(array(
+			"APIKey" => $settings['smugmug_apikey'], 
+			"AppName" => "SmugTweet (http://gallupbid.digitalcraftworks.com/)", 
+        ));
+        
+        $smugMugSvc->login(array(
+            "EmailAddress" => $settings['smugmug_email'], 
+            "Password" => $settings['smugmug_password']
+        ));
+        
+        $smugMugSvc->images_upload(array(
+			"File" => $photo->url,
+//            "FileName" => $photo->gooId,
+            "AlbumID" => $albumId
+        ));
     }
 }
 ?>

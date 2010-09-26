@@ -14,6 +14,7 @@ require './classes/TwitgooPoller.php';
 require './classes/Photo.php';
 require './classes/PhotoStorage.php';
 require './classes/SmugStore.php';
+require_once './phpSmug/phpSmug.php';
 
 /**
  * Log4PHP setup
@@ -47,7 +48,7 @@ try {
  *
  *      <twitter account> => <SmugMug Gallery title>
  */
-define('DEFAULT_GALLERY', 'To-Be-Sorted');
+define('DEFAULT_GALLERY', '13897183'); // Album ID for album titled: To Be Sorted
 $galleryMap = array(
     'BIDPrototype' => 'BIDPrototype', // real gallery titles s/b user-friendly
 );
@@ -55,9 +56,11 @@ $galleryMap = array(
 $photosAdded = $photosUploaded = 0;
 foreach ($photos as $photo) {
 	$gallery = DEFAULT_GALLERY;
-	if (isset($galleryMap[$photo->twitterAccount])) {
-		$gallery = $galleryMap[$photo->twitterAccount];
-	}
+	// TODO have translate these to appropriate (integer) albumIDs
+	//  before we use them...
+//	if (isset($galleryMap[$photo->twitterAccount])) {
+//		$gallery = $galleryMap[$photo->twitterAccount];
+//	}
 
 	$photo->location = $gallery;
 
