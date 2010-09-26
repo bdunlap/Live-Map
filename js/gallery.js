@@ -10,7 +10,7 @@ function getNext()
     // Check to see if the counter has been initialized
     if ( typeof getNext.counter == 'undefined' ) {
         // It has not... perform the initilization
-        getNext.counter = 0;
+        getNext.counter = 1;
     }
 
     var Img = $.ajax({
