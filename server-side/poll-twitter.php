@@ -42,7 +42,7 @@ $accountsToPoll = array(
     'GallupBIDFire6',
     'GallupBIDFire3',
     'GallupBIDFire5',
-    'GallupBIDFire2',
+    'GallupBIDFire4',
 );
 
 try {
@@ -103,10 +103,14 @@ foreach ($photos as $photo) {
 
 
 	try {
+		$_logger->info("about to add photo {$photo->gooId} to local storage");
 		PhotoStorage::addPhoto($photo);
+		$_logger->info("added photo {$photo->gooId} to local storage");
 		$photosAdded++;
 
+		$_logger->info("about to upload photo {$photo->gooId} to SmugMug gallery $gallery");
 		SmugStore::uploadPhoto($photo, $gallery);
+		$_logger->info("uploaded photo {$photo->gooId} to SmugMug gallery $gallery");
 		$photosUploaded++;
 	} catch (PhotoStorageException $e) {
         $_logger->error("addPhoto() failed with [{$e->getMessage()}]");

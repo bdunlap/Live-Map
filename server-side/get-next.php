@@ -5,7 +5,6 @@ include INCLUDE_PATH.'/settings.php';
 
 require './classes/Photo.php';
 require './classes/PhotoStorage.php';
-require './log4php/Logger.php';
 
 /**
  * Log4PHP setup
