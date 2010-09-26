@@ -15,7 +15,7 @@ function renderMap() {
 
     makeMarker();
 
-	districtOutlineAndMarkers = new google.maps.KmlLayer('http://gallupbid.digitalcraftworks.com/new-code/bid-dev2.kml');
+	districtOutlineAndMarkers = new google.maps.KmlLayer('http://gallupbid.digitalcraftworks.com/new-code/bid-no-markers.kml');
 	districtOutlineAndMarkers.setMap(map);
 
 }
