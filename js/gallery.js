@@ -47,7 +47,7 @@ function getNext()
 }
 
 var imageCounter = 0;
-var maxThumbnails = 8;
+var maxThumbnails = 16;
 
 function timedCount()
 {
