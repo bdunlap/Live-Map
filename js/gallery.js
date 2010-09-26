@@ -1,6 +1,6 @@
 var t;
 var timer_is_on=0;
-var galleryInterval = 15000; // 15 seconds
+var galleryInterval = 30000; // 30 seconds
 
 function getNext()
 {
