@@ -26,6 +26,10 @@ if (!isset($_logger)) {
     $_logger = Logger::getLogger('poll-twitter');
 }
 
+$startMsg = "BEGIN RUN: ".date('r');
+$_logger->info($startMsg);
+echo "$startMsg\n";
+
 $accountsToPoll = array(
     'BIDPrototype'
 );
@@ -70,15 +74,17 @@ foreach ($photos as $photo) {
 	try {
 		PhotoStorage::addPhoto($photo, $gallery);
 		$photosAdded++;
+		$_logger->info("addPhoto() succeeded, photosAdded = [$photosAdded]");
 	} catch (Exception $e) {
         $_logger->error("addPhoto() failed with [{$e->getMessage()}]");
     }
 }
 
 $msg = "Photos uploaded: $photosUploaded\n"
-     . "Photos added to local storage: $photosAdded";
+     . "Photos added to local storage: $photosAdded\n"
+     . "END RUN: ".date('r');
 
 $_logger->info($msg);
-echo "$msg\n";
+echo "$msg\n\n";
 
 ?>

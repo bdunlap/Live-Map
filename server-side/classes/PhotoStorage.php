@@ -56,6 +56,8 @@ class PhotoStorage
      */
     static public function getPhoto($id = NULL)
     {
+		global $_logger;
+
         if (is_null(self::$_dbh)) {
             self::_connectToDb();
         }
@@ -81,21 +83,18 @@ class PhotoStorage
 
         $sth = self::$_dbh->prepare($q);
         if (!$sth) {
-            $errorInfo = self::$_dbh->errorInfo();
-            error_log(__FUNCTION__.": PDO's prepare() "
-                . " returned error [{$errorInfo[2]}]. Query follows.\n"
-                . $q
+            $errorInfo = $sth->errorInfo();
+            $_logger->error(__FUNCTION__.": PDO's prepare() "
+                . " returned error [{$errorInfo[2]}]"
             );
 
             throw new Exception("Database-prepare error [read operation]");
         }
 
         if (!$sth->execute($params)) {
-            $errorInfo = self::$_dbh->errorInfo();
-            error_log(__FUNCTION__.": PDO's execute() "
-                . " returned error [{$errorInfo[2]}]. Query follows.\n"
-                . "[$q], parameters: "
-                . '[' . implode("],[", $params) . ']'
+            $errorInfo = $sth->errorInfo();
+            $_logger->error(__FUNCTION__.": PDO's execute() "
+                . " returned error [{$errorInfo[2]}]"
             );
 
             throw new Exception("Database-execute error [read operation]");
@@ -157,6 +156,8 @@ class PhotoStorage
      */
     static private function _changeDb($q, $params)
     {
+		global $_logger;
+
         if (is_null(self::$_dbh)) {
             self::_connectToDb();
         }
@@ -164,21 +165,18 @@ class PhotoStorage
         $sth = self::$_dbh->prepare($q);
 
         if (!$sth) {
-            $errorInfo = self::$_dbh->errorInfo();
-            error_log(__FUNCTION__.": PDO's prepare() "
-                . " returned error [{$errorInfo[2]}]. Query follows.\n"
-                . $q
+            $errorInfo = $sth->errorInfo();
+            $_logger->error(__FUNCTION__.": PDO's prepare() "
+                . " returned error [{$errorInfo[2]}]"
             );
 
             throw new Exception("Database-prepare error [write operation]");
         }
 
         if (!$sth->execute($params)) {
-            $errorInfo = self::$_dbh->errorInfo();
-            error_log(__FUNCTION__.": PDO's execute() "
-                . " returned error [{$errorInfo[2]}]. Query follows.\n"
-                . "[$q], parameters: "
-                . '[' . implode("],[", $params) . ']'
+            $errorInfo = $sth->errorInfo();
+            $_logger->error(__FUNCTION__.": PDO's execute() "
+                . " returned error [{$errorInfo[2]}]"
             );
 
             throw new Exception("Database-execute error [write operation]");
@@ -187,7 +185,7 @@ class PhotoStorage
 
     static private function _connectToDb()
     {
-        global $settings;
+        global $settings, $_logger;
         $dsn = "mysql:dbname={$settings['db_name']};"
                    . "host={$settings['db_host']}";
         try {
@@ -200,7 +198,7 @@ class PhotoStorage
                 )
             );
         } catch (PDOException $e) {
-            error_log(__FUNCTION__.": PDO constructor failed. "
+            $_logger->error(__FUNCTION__.": PDO constructor failed. "
                 . "Exception follows.\n" . print_r($e, 1)
             );
 
