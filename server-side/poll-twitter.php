@@ -8,7 +8,7 @@ error_reporting(-1);
  * the SmugMug API, or (if we can't get a SmugMug API key in time) emailing them
  * in to the default gallery.
  */
-include './settings.php';
+include '/var/gallupbid-support/settings.php';
 
 require './classes/TwitgooPoller.php';
 require './classes/Photo.php';
@@ -31,7 +31,9 @@ $_logger->info($startMsg);
 echo "$startMsg\n";
 
 $accountsToPoll = array(
-    'BIDPrototype'
+//    'BIDPrototype',
+	'GallupBIDFireG',
+	'GallupBIDFire2',
 );
 
 try {
@@ -48,36 +50,46 @@ try {
  *
  *      <twitter account> => <SmugMug Gallery title>
  */
+$twitterToGallery = array(
+	'GallupBIDFire8' => 'Coal Mining Era Mural',
+	'GallupBIDFire10' => 'Navajo Code Talkers Mural',
+	'GallupBIDFire2' => 'Great Gallup Mural',
+	'GallupBIDFireG' => 'Mission G: Painted Horse Sculpture',
+	'GallupBIDFireF2' => 'Mission F2: Code Talkers Statue',
+	'GallupBIDFireF1' => 'Mission F1 - Chief Manuelito Statue',
+);
+
 define('DEFAULT_GALLERY', '13897183'); // Album ID for album titled: To Be Sorted
-$galleryMap = array(
-    'BIDPrototype' => 'BIDPrototype', // real gallery titles s/b user-friendly
+$galleryIds = array(
+	'Mission G: Painted Horse Sculpture' => '13917166',
+	'Great Gallup Mural' => '13917195',
 );
 
 $photosAdded = $photosUploaded = 0;
 foreach ($photos as $photo) {
-	$gallery = DEFAULT_GALLERY;
-	// TODO have translate these to appropriate (integer) albumIDs
-	//  before we use them...
-//	if (isset($galleryMap[$photo->twitterAccount])) {
-//		$gallery = $galleryMap[$photo->twitterAccount];
-//	}
+	$location = "unknown";
+	if (isset($twitterToGallery[$photo->twitterAccount])) {
+		$location = $twitterToGallery[$photo->twitterAccount];
+	}
+	$photo->location = $location;
 
-	$photo->location = $gallery;
+	$gallery = DEFAULT_GALLERY;
+	if (isset($galleryIds[$location])) {
+		$gallery = $galleryIds[$location];
+	}
+
 
 	try {
+		PhotoStorage::addPhoto($photo);
+		$photosAdded++;
+
 		SmugStore::uploadPhoto($photo, $gallery);
 		$photosUploaded++;
+	} catch (PhotoStorageException $e) {
+        $_logger->error("addPhoto() failed with [{$e->getMessage()}]");
     } catch(Exception $e) {
         $_logger->error("uploadPhoto() failed with [{$e->getMessage()}]");
 	}
-
-	try {
-		PhotoStorage::addPhoto($photo, $gallery);
-		$photosAdded++;
-		$_logger->info("addPhoto() succeeded, photosAdded = [$photosAdded]");
-	} catch (Exception $e) {
-        $_logger->error("addPhoto() failed with [{$e->getMessage()}]");
-    }
 }
 
 $msg = "Photos uploaded: $photosUploaded\n"

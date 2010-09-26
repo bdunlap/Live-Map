@@ -12,11 +12,10 @@ class PhotoStorage
      * Adds info about a photo to our local storage
      *
      * @param Photo
-     * @param string
      *
      * @throws Exception Bubbles up from _changeDb()
      */
-    static public function addPhoto($photo, $location)
+    static public function addPhoto($photo)
     {
         $q = "
             INSERT INTO photos
@@ -88,7 +87,7 @@ class PhotoStorage
                 . " returned error [{$errorInfo[2]}]"
             );
 
-            throw new Exception("Database-prepare error [read operation]");
+            throw new PhotoStorageException("Database-prepare error [read operation]");
         }
 
         if (!$sth->execute($params)) {
@@ -97,7 +96,7 @@ class PhotoStorage
                 . " returned error [{$errorInfo[2]}]"
             );
 
-            throw new Exception("Database-execute error [read operation]");
+            throw new PhotoStorageException("Database-execute error [read operation]");
         }
 
         $row = $sth->fetch(PDO::FETCH_ASSOC);
@@ -134,7 +133,7 @@ class PhotoStorage
 		);
 
 		if ($idToMark === FALSE) {
-			throw new Exception(__FUNCTION__ . ": passed an invalid goo-ID");
+			throw new PhotoStorageException(__FUNCTION__ . ": passed an invalid goo-ID");
 		}
 
         $q = "
@@ -170,7 +169,7 @@ class PhotoStorage
                 . " returned error [{$errorInfo[2]}]"
             );
 
-            throw new Exception("Database-prepare error [write operation]");
+            throw new PhotoStorageException("Database-prepare error [write operation]");
         }
 
         if (!$sth->execute($params)) {
@@ -179,7 +178,7 @@ class PhotoStorage
                 . " returned error [{$errorInfo[2]}]"
             );
 
-            throw new Exception("Database-execute error [write operation]");
+            throw new PhotoStorageException("Database-execute error [write operation]");
         }
     }
 
@@ -202,10 +201,12 @@ class PhotoStorage
                 . "Exception follows.\n" . print_r($e, 1)
             );
 
-            throw new Exception("Database-connect error");
+            throw new PhotoStorageException("Database-connect error");
         }
             
     }
 }
+
+class PhotoStorageException extends Exception {}
 
 ?>

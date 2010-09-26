@@ -8,6 +8,11 @@
  */
 class SmugStore
 {
+	/**
+	 * @var phpSmug
+	 */
+	static private $_smugMugSvc = NULL;
+
     /**
      * Stores a photo on SmugMug
      *
@@ -28,26 +33,24 @@ class SmugStore
         // grab the global log4php instance
         global $_logger, $settings;
         
-        $imageData = file_get_contents($photo->url);
-        if (!$imageData) {
-            throw new Exception(__FUNCTION__ . ": couldn't download file "
-				. " at [$photo->url]");
-        }
+		if (is_null(self::$_smugMugSvc)) {
+			self::$_smugMugSvc = new phpSmug(array(
+				"APIKey" => $settings['smugmug_apikey'], 
+				"AppName" => "SmugTweet (http://gallupbid.digitalcraftworks.com/)", 
+			));
+		}
         
-        $smugMugSvc = new phpSmug(array(
-			"APIKey" => $settings['smugmug_apikey'], 
-			"AppName" => "SmugTweet (http://gallupbid.digitalcraftworks.com/)", 
-        ));
-        
-        $smugMugSvc->login(array(
+
+		self::$_smugMugSvc->login(array(
             "EmailAddress" => $settings['smugmug_email'], 
-            "Password" => $settings['smugmug_password']
+            "Password" => $settings['smugmug_password'],
         ));
         
-        $smugMugSvc->images_upload(array(
-			"File" => $photo->url,
-//            "FileName" => $photo->gooId,
-            "AlbumID" => $albumId
+		$_logger->info("about to upload to album [$albumId]");
+		self::$_smugMugSvc->images_uploadFromURL(array(
+			"URL" => $photo->url,
+            "FileName" => $photo->gooId,
+            "AlbumID" => $albumId,
         ));
     }
 }

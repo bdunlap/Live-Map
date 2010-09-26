@@ -102,8 +102,21 @@ class TwitgooPoller
             foreach ($xmlobject->children() as $media) {
                 //get text and URL
                 $text = strval($media->text);
-                $imageUrl = strval($media->imageurl);
-                $thumbnailUrl = strval($media->thumburl);
+
+                $imageUrl = filter_var(strval($media->imageurl), FILTER_VALIDATE_URL);
+				if ($imageUrl === FALSE) {
+					$msg = ("got invalid image URL from Twitgoo");
+					$_logger->error($msg);
+					throw new TwitgooException($msg);
+				}
+
+                $thumbnailUrl = filter_var(strval($media->thumburl), FILTER_VALIDATE_URL);
+				if ($thumbnailUrl === FALSE) {
+					$msg = ("got invalid thumbnail URL from Twitgoo");
+					$_logger->error($msg);
+					throw new TwitgooException($msg);
+				}
+
                 $gooId = strval($media->mediaid);
 
                 $imgObj = new Photo();
