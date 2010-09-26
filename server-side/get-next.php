@@ -1,6 +1,7 @@
 <?php
 error_reporting(-1);
-include '/var/gallupbid-support/settings.php';
+require './include-path.php';
+include INCLUDE_PATH.'/settings.php';
 
 require './classes/Photo.php';
 require './classes/PhotoStorage.php';
@@ -9,8 +10,8 @@ require './log4php/Logger.php';
 /**
  * Log4PHP setup
  */
-require_once("log4php/Logger.php"); 
-Logger::configure('log4php.properties'); 
+require './log4php/Logger.php'; 
+Logger::configure(INCLUDE_PATH.'/log4php.properties'); 
 
 if (!isset($_logger)) {
     $_logger = Logger::getLogger('get-next');

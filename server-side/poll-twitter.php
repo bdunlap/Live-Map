@@ -15,12 +15,12 @@ require './classes/TwitgooPoller.php';
 require './classes/Photo.php';
 require './classes/PhotoStorage.php';
 require './classes/SmugStore.php';
-require_once './phpSmug/phpSmug.php';
+require './phpSmug/phpSmug.php';
 
 /**
  * Log4PHP setup
  */
-require_once("log4php/Logger.php"); 
+require './log4php/Logger.php'; 
 Logger::configure(INCLUDE_PATH.'/log4php.properties'); 
 
 if (!isset($_logger)) {
