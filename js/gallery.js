@@ -59,10 +59,7 @@ function timedCount()
 
         placeNext();
         timedCount.counter++;
-        if (timedCount.counter < 15)
-        {
-            t=setTimeout("timedCount()",5000);
-        }
+        t=setTimeout("timedCount()",5000);
 }
 
 function doTimer()

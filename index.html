@@ -21,9 +21,9 @@
 <script type="text/javascript">
 $(document).ready(function() {
     $('#get-an-image').click(placeNext);
-    $('#start-timer').click(doTimer);
     $('change-marker').click(changeMarker);
     renderMap();
+    doTimer();
 });
 </script>
 
@@ -38,8 +38,6 @@ $(document).ready(function() {
 
 <header>
 	<nav>
-		<button id='get-an-image' type='button'>Get an Image</button>
-        <button id='start-timer' type='button'>Click me and wait!</button>
         <button id='change-marker' type='button'>Change a Marker!</button>
 
 	</nav>
