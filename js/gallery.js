@@ -144,5 +144,10 @@ function placeNext()
 	var locationName = noUnderscores.replace(missionFixer, 'Mission $1:');
 	placeNext.infoWindow.setContent("<p>" + caption + "</p><p class='location-attribution'>from " + locationName + "</p>");
 	placeNext.infoWindow.open(map, markers[locationId]);
+	/**
+	 * Get rid of the spurious scroll bars in the InfoWindow
+	 */
+	var bubbleDiv = $('.location-attribution').parent();
+	bubbleDiv.removeAttr('style');
 }
 
