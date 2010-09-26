@@ -1,11 +1,21 @@
 <?php
+error_reporting(-1);
 include './settings.php';
 
 require './classes/Photo.php';
 require './classes/PhotoStorage.php';
 require './log4php/Logger.php';
 
-$_logger = Logger::getLogger('get-next');
+/**
+ * Log4PHP setup
+ */
+require_once("log4php/Logger.php"); 
+Logger::configure('log4php.properties'); 
+
+if (!isset($_logger)) {
+    $_logger = Logger::getLogger('get-next');
+}
+
 
 $photoId = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT,
     array(

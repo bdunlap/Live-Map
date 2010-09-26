@@ -14,7 +14,7 @@ function getNext()
     }
 
     var Img = $.ajax({
-        url: 'server-side/get-next.php?id=' + getNext.counter++,
+        url: 'server-side/get-next.php?id=' + getNext.counter,
         async: false
         }).responseText;
 
@@ -39,6 +39,8 @@ function getNext()
 
         console.log(parsedImg);
 
+        getNext.counter++;
+
         return parsedImg;
     }
 
@@ -57,10 +59,7 @@ function timedCount()
 
         placeNext();
         timedCount.counter++;
-        if (timedCount.counter < 15)
-        {
-            t=setTimeout("timedCount()",5000);
-        }
+        t=setTimeout("timedCount()",5000);
 }
 
 function doTimer()
