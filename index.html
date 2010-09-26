@@ -36,7 +36,7 @@ $(document).ready(function() {
 	});
 
 	$('#accel-gallery').click(function() {
-		if(galleryInterval > 5000) {
+		if(galleryInterval > 2000) {
 			galleryInterval -= 1000;
 			$('#gallery-speed').text(galleryInterval / 1000);
 		} else {	
@@ -48,7 +48,7 @@ $(document).ready(function() {
 		galleryInterval += 1000;
 		$('#gallery-speed').text(galleryInterval / 1000);
 
-		if(galleryInterval === 6000) {
+		if(galleryInterval === 3000) {
 			$('#accel-gallery').removeAttr('disabled');
 		}
 	});
@@ -71,6 +71,7 @@ $(document).ready(function() {
 <div id='canvas'>
 
 <header>
+<h1>Fireball Run 2010: <span>Gallup, New Mexico</span></h1>
 </header>
 
 <section id='photos'>
@@ -95,19 +96,20 @@ $(document).ready(function() {
 </section>
 
 <nav>
-	<p>
-	Server status: <span id='server-status'>unknown</span>, image counter <span id='photo-counter'>&lt;none&gt;</span>
-	</p>
-
-	<p>
-		<button id='start-gallery' type='button'>Start Gallery</button>
-		<button id='pause-gallery' type='button'>Pause Gallery</button>
+	<p id='dashboard'>
+	Server status: <span id='server-status'>none</span><br />
+	Image counter: <span id='photo-counter'>none</span>
 	</p>
 
 	<p>
 		<button id='accel-gallery' type='button'>Hurry Up</button>
 		<button id='decel-gallery' type='button'>Slow Down</button>
-		Current speed: <span id='gallery-speed'>15</span>
+		Seconds between photos: <span id='gallery-speed'>15</span>
+	</p>
+
+	<p>
+		<button id='start-gallery' type='button'>Start Gallery</button>
+		<button id='pause-gallery' type='button'>Pause Gallery</button>
 	</p>
 </nav>
 

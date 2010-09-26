@@ -1,3 +1,7 @@
+body * {
+	font-family: Helvetica, Arial, sans-serif;
+}
+
 #canvas {
 	width: 960px;
 	padding: 0 10px;
@@ -7,6 +11,19 @@
 header {
 	height: 60px;
 	display: block;
+}
+
+h1 {
+	padding-top: 10px;
+}
+
+h1, h1 span {
+	font-size: 40px;
+	font-family: Georgia, sans-serif;
+}
+h1 span {
+	color: #61d1d1;
+	font-weight: bold;
 }
 
 section {
@@ -42,7 +59,11 @@ section {
 #thumbnails {
     float: none;
     clear: both;
-    height: 230px;
+    height: 225px;
+	padding: 10px 0 0 20px;
+	background-color: #363636;
+	border: 1px solid #999;
+	margin-bottom: 30px;
 }
 
 #thumbnails .thumb {
@@ -50,8 +71,11 @@ section {
 	float: left;
 	width: 100px;
 	height: 100px;
-	margin: 0 20px 20px 0;
+	margin: 0 14px 10px 0;
 	overflow: hidden;
+
+	border: 1px solid #666;
+	outline: 1px solid #999;
 }
 
 .location-attribution {
@@ -59,3 +83,12 @@ section {
 	font-size: 0.75em;
 	font-style: italic;
 }
+
+nav {
+	font-size: 0.75em;
+}
+
+#dashboard {
+	float: right;
+}
+

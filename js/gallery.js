@@ -76,14 +76,14 @@ function placeNext()
 {
 	var newImgObject = getNext();
 	if (newImgObject === null) {
-		console.log("getNext() returned null.");
+//		console.log("getNext() returned null.");
 		return;
     }
     var newUrl = newImgObject.url;
     var thumbUrl = newImgObject.thumbnailUrl;
 	var caption = newImgObject.text;
 	var locationId = newImgObject.locationId;
-    console.log(newUrl);
+    //console.log(newUrl);
 
 	/**
 	 * Create HTML code for the featured image:
