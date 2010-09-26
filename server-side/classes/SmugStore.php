@@ -28,7 +28,7 @@ class SmugStore
      * @throws SmugException
      * @throws Exception
      */
-    static public function uploadPhoto($photo, $albumId)
+    static public function uploadPhoto(&$photo, $albumId)
     {
         // grab the global log4php instance
         global $_logger, $settings;
@@ -52,6 +52,31 @@ class SmugStore
             "FileName" => $photo->gooId,
             "AlbumID" => $albumId,
         ));
+        $_logger->debug("SmugMug response: [".self::$_smugMugSvc->response."]");
+        $resp = unserialize(self::$_smugMugSvc->response);
+        if ($resp['stat'] !== 'ok') {
+            $_logger->info('Did not get an "ok" response from SmugMug upload');
+            return;
+        }
+
+        $imgId = $resp['Image']['id'];
+        $imgKey = $resp['Image']['Key'];
+        self::$_smugMugSvc->images_getURLs(
+            array(
+                "ImageID" => $imgId,
+                "ImageKey" => $imgKey,
+            )
+        );
+
+        $_logger->debug("SmugMug response: [".self::$_smugMugSvc->response."]");
+        $resp = unserialize(self::$_smugMugSvc->response);
+        if ($resp['stat'] !== 'ok') {
+            $_logger->info('Did not get an "ok" response from SmugMug getURLs');
+            return;
+        }
+
+        $photo->url = $resp['Image']['MediumURL'];
+        $photo->thumbnailUrl = $resp['Image']['TinyURL'];
     }
 }
 ?>
