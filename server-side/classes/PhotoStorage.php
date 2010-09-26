@@ -109,7 +109,7 @@ class PhotoStorage
 
         $photo->url = $row['url'];
         $photo->thumbnailUrl = $row['thumbnail_url'];
-        $photo->text = $row['text'];
+        $photo->text = $row['caption'];
         $photo->location = $row['location'];
         $photo->gooId = $row['goo_id'];
 

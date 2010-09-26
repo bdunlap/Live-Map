@@ -60,7 +60,7 @@ function encodeData($nextPhoto)
                             "url" => $nextPhoto->url,
                             "thumbnailUrl" => $nextPhoto->thumbnailUrl,
                             "text" => $nextPhoto->text,
-                            "location" => $nextPhoto->location
+                            "locationId" => $nextPhoto->location,
                           );
     return json_encode($relevantData);
 }
