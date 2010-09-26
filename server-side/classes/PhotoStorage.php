@@ -124,12 +124,14 @@ class PhotoStorage
         if (is_null($id)) {
             $q .= "
                 WHERE seen_yet = 0
+				AND (now() - uploaded_at) > 60
                 ORDER BY id ASC
                 LIMIT 1
             ";
         } else {
             $q .= "
                 WHERE id = ?
+				AND (now() - uploaded_at) > 60
             ";
             $params[] = $id;
         }
