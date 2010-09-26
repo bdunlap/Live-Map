@@ -10,7 +10,7 @@ function getNext()
     // Check to see if the counter has been initialized
     if ( typeof getNext.counter == 'undefined' ) {
         // It has not... perform the initilization
-        getNext.counter = 0;
+        getNext.counter = 1;
     }
 
     var Img = $.ajax({
@@ -80,6 +80,8 @@ function placeNext()
     }
     var newUrl = newImgObject.url;
     var thumbUrl = newImgObject.thumbnailUrl;
+	var caption = newImgObject.text;
+	var locationId = newImgObject.locationId;
     console.log(newUrl);
 
 	/**
@@ -100,7 +102,9 @@ function placeNext()
 	 *       <img src="[image URL here, with 'Ti' suffix so we use SmugMug's 'Tiny' version of the photo]" />
      *   </div>
 	 */
-	var newThumb = '<img src="' + thumbUrl + '" />';
+	var newThumb = '<img src="' + thumbUrl + '" '
+	                  + 'title="' + caption + '" '
+					  + '/>';
 
 	var newThumbDiv = '<div id="thumb-' + imageCounter + '" '
 		            + 'class="thumb">' + newThumb + '</div>';

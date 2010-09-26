@@ -5,7 +5,6 @@ include INCLUDE_PATH.'/settings.php';
 
 require './classes/Photo.php';
 require './classes/PhotoStorage.php';
-require './log4php/Logger.php';
 
 /**
  * Log4PHP setup
@@ -61,7 +60,7 @@ function encodeData($nextPhoto)
                             "url" => $nextPhoto->url,
                             "thumbnailUrl" => $nextPhoto->thumbnailUrl,
                             "text" => $nextPhoto->text,
-                            "location" => $nextPhoto->location
+                            "locationId" => $nextPhoto->location,
                           );
     return json_encode($relevantData);
 }

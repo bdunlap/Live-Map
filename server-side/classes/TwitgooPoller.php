@@ -22,6 +22,7 @@ class TwitgooPoller
         $error = FALSE;
         
         foreach ($twitterAccounts as $account) {
+			$_logger->info(__FUNCTION__ . ": about to poll $account");
             try {
                 $twitterResponse = self::_getPhotoResponse($account);
                 $photoArrayForAccount = self::_parseResponse($twitterResponse, $account);
@@ -100,6 +101,7 @@ class TwitgooPoller
 
         try {
             foreach ($xmlobject->children() as $media) {
+				$_logger->debug("examining ".count($xmlobject->children())." media elements");
                 //get text and URL
                 $text = strval($media->text);
 
@@ -134,7 +136,7 @@ class TwitgooPoller
             $_logger->error(
             	"Caught Exception parsing through XML twitgoo response.", $e);
             throw new TwitgooException(
-            	"Caught Exception parsing through XML twitgoo response.", $e);
+				"Caught Exception parsing through XML twitgoo response.");
         }
 
         return $images;
