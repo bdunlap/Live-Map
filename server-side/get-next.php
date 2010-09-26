@@ -58,10 +58,14 @@ echo $JSData;
  */
 function encodeData($nextPhoto)
 {
+	$caption = "Latest photo";
+	if (!empty($nextPhoto->text)) {
+		$caption = $nextPhoto->text;
+	}
     $relevantData  = array( "status" => "SUCCESS",
                             "url" => $nextPhoto->url,
                             "thumbnailUrl" => $nextPhoto->thumbnailUrl,
-                            "text" => $nextPhoto->text,
+                            "text" => $caption,
                             "locationId" => $nextPhoto->location,
                           );
     return json_encode($relevantData);
