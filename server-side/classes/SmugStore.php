@@ -25,7 +25,7 @@ class SmugStore
      */
     static public function uploadPhoto($photo, $gallery)
     {
-		throw new Exception("here we would upload [$photo->url] to SmugMug\n");
+		throw new Exception("here we would upload [$photo->url] to SmugMug");
 
         $imageData = file_get_contents($photo->url);
         if (!$imageData) {
