@@ -1,5 +1,5 @@
 var map;
-var marker;
+var markers;
 var bidCenter = new google.maps.LatLng(35.526000, -108.743200);
 var districtOutlineAndMarkers;
 
@@ -8,36 +8,67 @@ function renderMap() {
 	var myOptions = {
 		center: bidCenter,
 		mapTypeId: google.maps.MapTypeId.SATELLITE,
-        zoom: 20
+        zoom: 16
 	}
 	 
 	map = new google.maps.Map(document.getElementById("map-canvas"), myOptions);
 
-    makeMarker();
+    markers = makeMarkers(map);
 
 	districtOutlineAndMarkers = new google.maps.KmlLayer('http://gallupbid.digitalcraftworks.com/bid-no-markers.kml');
 	districtOutlineAndMarkers.setMap(map);
 
 }
 
-function makeMarker() {
+function makeMarkers(map)
+{
+	var markerList = {
+		Command_Center: 
+			new google.maps.Marker({
+				position: new google.maps.LatLng(35.525871, -108.7425690),
+				map: map,
+				title:"BID New Media Command Center"
+			}),
 
-    var markerCenter = new google.maps.LatLng(35.525871, -108.7425690);
-    marker2 = new google.maps.Marker({
-            position: markerCenter, 
-            map: map,
-            title:"BID New Media Command Center"
-        });
+		Coal_Mining_Era_Mural:
+			new google.maps.Marker({
+				position: new google.maps.LatLng(35.526604,-108.743256),
+				map: map,
+				title:"Coal Mining Era Mural"
+			}),
 
-	/*
-    var infoWindow = new google.maps.InfoWindow({
-            content:"some balloon content for all to see."
-        });
+		Navajo_Code_Talkers_Mural:
+			new google.maps.Marker({
+				position: new google.maps.LatLng(35.527312,-108.742992),
+				map: map,
+				title:"Navajo Code Talkers Mural"
+			}),
 
-    google.maps.event.addListener(marker2, 'click', function() {
-      infoWindow.open(map,marker2);
-    });
+		Great_Gallup_Mural:
+			new google.maps.Marker({
+				position: new google.maps.LatLng(35.526619,-108.742166),
+				map: map,
+				title:"Great Gallup Mural"
+			}),
+
+		Mission_G_Painted_Horse_Sculpture:
+			new google.maps.Marker({
+				position: new google.maps.LatLng(35.529345,-108.740294),
+				map: map,
+				title:"Mission G: Painted Horse Sculpture"
+			})
+			/*
+		Mission_F2_Code_Talkers_Statue:
+		Mission_F1_Chief_Manuelito_Statue:
+		Mission_A2_First_American_Traders:
+		Womens_MultiCultural_Mural:
+		Zuni_Mural:
+		Veterans_Mural:
+		Long_Walk_Home_Mural:
 	*/
+	};
+
+	return markerList;
 
     markerCenter = new google.maps.LatLng(35.528454,-108.741005);
     marker3 = new google.maps.Marker({
@@ -56,18 +87,6 @@ function makeMarker() {
             position: markerCenter,
             map: map,
             title:"Mission F2: Code Talkers Statue"
-        });
-      markerCenter = new google.maps.LatLng(35.529345,-108.740294);
-     marker5 = new google.maps.Marker({
-            position: markerCenter,
-            map: map,
-            title:"Mission G: Painted Horse Sculpture"
-        });
-      markerCenter = new google.maps.LatLng(35.526619,-108.742166);
-      marker8 = new google.maps.Marker({
-            position: markerCenter,
-            map: map,
-            title:"Great Gallup Mural"
         });
     var infoWindow = new google.maps.InfoWindow({
         content:'<i>Paul Newman, Artist</i><div>"...Most of the history of a community takes place in the residents\' daily lives, for instance, where they work and, importantly, their environment. &nbsp;We chose to emphasize five broad themes - the landscape, railroads, Highway 66, rodeos, western life and coal mining."</div>'
@@ -116,12 +135,6 @@ function makeMarker() {
         });
     var infoWindow = new google.maps.InfoWindow({
         contents:'<i>Andrew Butler, Artist</i><div>The 1935 Gallup Riot took place along this alley during which Sheriff Carmichael was killed. &nbsp;Depicted are a Navajo rail crew, legendary for their speed, the McKinley strip mine on the Navajo Reservation, the Gamerco Electric Generating Plant, coal competitions on days off, and the McGaffey timber industry nearby supplying the mines with structural materials.</div>>'
-        });
-      markerCenter = new google.maps.LatLng(35.527312,-108.742992);
-     marker17 = new google.maps.Marker({
-            position: markerCenter,
-            map: map,
-            title:"Navajo Code Talkers' Mural"
         });
     var infoWindow = new google.maps.InfoWindow({
         contents:'<i>Be Sargent, Artist</i><div>"The first 29 Code Talkers devised the Navajo Code. &nbsp;Part of the code was an alphabet which was used to spell words like names of strategic places. &nbsp;The mural depicts the code being passed on to the children of the Code Talkers symbolizing the perpetuation of the Navajo language."</div>'

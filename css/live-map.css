@@ -19,11 +19,9 @@ section {
 }
 
 #featured img {
-	max-width: 470px; /**
-                       * this will yield a max-height of ~313px if we are using
-                       * SmugMug's 'Medium' size (max 600x400).
-                       */
-
+	max-height: 312px;
+	margin: 0 auto;
+	display: block;
 }
 
 #map-canvas {
@@ -52,6 +50,11 @@ section {
 	float: left;
 	width: 100px;
 	height: 100px;
-	margin: 0 10px 10px 0;
+	margin: 0 20px 10px 0;
 	overflow: hidden;
+}
+
+.location-attribution {
+	font-size: 0.75em;
+	font-style: italic;
 }

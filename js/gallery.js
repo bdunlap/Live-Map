@@ -1,9 +1,6 @@
 var t;
 var timer_is_on=0;
-
-function changeMarker()
-{
-}
+var galleryInterval = 15000; // 15 seconds
 
 function getNext()
 {
@@ -47,10 +44,13 @@ function getNext()
 }
 
 var imageCounter = 0;
-var maxThumbnails = 16;
+var maxThumbnails = 6;
 
 function timedCount()
 {
+	if (!timer_is_on) {
+		return;
+	}
     // Check to see if the counter has been initialized
     if ( typeof timedCount.counter == 'undefined' ) {
         // It has not... perform the initilization
@@ -59,16 +59,18 @@ function timedCount()
 
         placeNext();
         timedCount.counter++;
-        t=setTimeout("timedCount()",5000);
+        t=setTimeout("timedCount()",galleryInterval);
 }
 
-function doTimer()
+function startGallery()
 {
-    if (!timer_is_on)
-    {
-        timer_is_on=1;
-        timedCount();
-    }
+	timer_is_on=1;
+	timedCount();
+}
+
+function pauseGallery()
+{
+	timer_is_on=0;
 }
 
 function placeNext()
@@ -132,5 +134,12 @@ function placeNext()
 	 */
 	$('#featured').append(featuredImg);
 	$(newThumbDiv).hide().prependTo('#thumbnails');
+
+    if ( typeof placeNext.infoWindow == 'undefined' ) {
+		placeNext.infoWindow = new google.maps.InfoWindow();
+    }
+
+	placeNext.infoWindow.setContent("<p>" + caption + "</p><p class='location-attribution'>from " + locationId + "</p>");
+	placeNext.infoWindow.open(map, markers[locationId]);
 }
 

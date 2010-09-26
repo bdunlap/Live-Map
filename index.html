@@ -21,10 +21,41 @@
 
 <script type="text/javascript">
 $(document).ready(function() {
-    $('#get-an-image').click(placeNext);
-    $('change-marker').click(changeMarker);
+	$('#pause-gallery').attr('disabled', 'disabled');
+
+    $('#start-gallery').click(function() {
+		$('#pause-gallery').removeAttr('disabled');
+		$(this).attr('disabled', 'disabled');
+		startGallery();
+	});
+
+    $('#pause-gallery').click(function() {
+		$('#start-gallery').removeAttr('disabled');
+		$(this).attr('disabled', 'disabled');
+		pauseGallery();
+	});
+
+	$('#accel-gallery').click(function() {
+		if(galleryInterval > 5000) {
+			galleryInterval -= 1000;
+			$('#gallery-speed').text(galleryInterval / 1000);
+		} else {	
+			$(this).attr('disabled', 'disabled');
+		}
+	});
+
+	$('#decel-gallery').click(function() {
+		galleryInterval += 1000;
+		$('#gallery-speed').text(galleryInterval / 1000);
+
+		if(galleryInterval === 6000) {
+			$('#accel-gallery').removeAttr('disabled');
+		}
+	});
+
+	$('#start-gallery').removeAttr('disabled');
+	$('#accel-gallery').removeAttr('disabled');
     renderMap();
-    doTimer();
 });
 </script>
 
@@ -38,10 +69,6 @@ $(document).ready(function() {
 <div id='canvas'>
 
 <header>
-	<nav>
-        <button id='change-marker' type='button'>Change a Marker!</button>
-
-	</nav>
 </header>
 
 <section id='photos'>
@@ -65,9 +92,22 @@ $(document).ready(function() {
     -->
 </section>
 
-<p>
-Server status: <span id='server-status'>unknown</span>
-</p>
+<nav>
+	<p>
+	Server status: <span id='server-status'>unknown</span>
+	</p>
+
+	<p>
+		<button id='start-gallery' type='button'>Start Gallery</button>
+		<button id='pause-gallery' type='button'>Pause Gallery</button>
+	</p>
+
+	<p>
+		<button id='accel-gallery' type='button'>Hurry Up</button>
+		<button id='decel-gallery' type='button'>Slow Down</button>
+		Current speed: <span id='gallery-speed'>15</span>
+	</p>
+</nav>
 
 </div>
 </body>
