@@ -8,6 +8,45 @@
 class PhotoStorage
 {
     static $_dbh = NULL;
+
+    static public function photoExists($photo)
+    {
+        $q = "
+            SELECT id FROM photos
+            WHERE goo_id = ?
+            ";
+
+        $params = array (
+            $photo->gooId,
+        );
+
+        $sth = self::$_dbh->prepare($q);
+        if (!$sth) {
+            $errorInfo = $sth->errorInfo();
+            $_logger->error(__FUNCTION__.": PDO's prepare() "
+                . " returned error [{$errorInfo[2]}]"
+            );
+
+            throw new PhotoStorageException("Database-prepare error [read operation]");
+        }
+
+        if (!$sth->execute($params)) {
+            $errorInfo = $sth->errorInfo();
+            $_logger->error(__FUNCTION__.": PDO's execute() "
+                . " returned error [{$errorInfo[2]}]"
+            );
+
+            throw new PhotoStorageException("Database-execute error [read operation]");
+        }
+
+        $row = $sth->fetch(PDO::FETCH_ASSOC);
+
+        if ($row) {
+            return TRUE;
+        }
+
+        return FALSE;
+    }
     /**
      * Adds info about a photo to our local storage
      *
