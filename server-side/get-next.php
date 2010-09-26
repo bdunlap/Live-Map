@@ -1,6 +1,6 @@
 <?php
 error_reporting(-1);
-include './settings.php';
+include '/var/gallupbid-support/settings.php';
 
 require './classes/Photo.php';
 require './classes/PhotoStorage.php';
