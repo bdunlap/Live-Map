@@ -8,7 +8,8 @@ error_reporting(-1);
  * the SmugMug API, or (if we can't get a SmugMug API key in time) emailing them
  * in to the default gallery.
  */
-include '/var/gallupbid-support/settings.php';
+require './include-path.php';
+include INCLUDE_PATH.'/settings.php';
 
 require './classes/TwitgooPoller.php';
 require './classes/Photo.php';
@@ -20,7 +21,7 @@ require_once './phpSmug/phpSmug.php';
  * Log4PHP setup
  */
 require_once("log4php/Logger.php"); 
-Logger::configure('log4php.properties'); 
+Logger::configure(INCLUDE_PATH.'/log4php.properties'); 
 
 if (!isset($_logger)) {
     $_logger = Logger::getLogger('poll-twitter');
@@ -31,9 +32,17 @@ $_logger->info($startMsg);
 echo "$startMsg\n";
 
 $accountsToPoll = array(
-//    'BIDPrototype',
-	'GallupBIDFireG',
+	'GallupBIDFire8',
+	'GallupBIDFire10',
 	'GallupBIDFire2',
+	'GallupBIDFireG',
+	'GallupBIDFireF2',
+	'GallupBIDFireF1',
+    'GallupBIDFireA2',
+    'GallupBIDFire6',
+    'GallupBIDFire3',
+    'GallupBIDFire5',
+    'GallupBIDFire2',
 );
 
 try {
@@ -45,31 +54,45 @@ try {
 }
 
 /**
- * Each Twitter account is associated with a specific gallery inside the SmugMug
- * account. Map those associations here, thus:
+ * Each Twitter account is associated with a specific location.  Map those
+ * associations here, thus:
  *
- *      <twitter account> => <SmugMug Gallery title>
+ *      <twitter account> => <Location Name>
  */
-$twitterToGallery = array(
-	'GallupBIDFire8' => 'Coal Mining Era Mural',
-	'GallupBIDFire10' => 'Navajo Code Talkers Mural',
-	'GallupBIDFire2' => 'Great Gallup Mural',
-	'GallupBIDFireG' => 'Mission G: Painted Horse Sculpture',
-	'GallupBIDFireF2' => 'Mission F2: Code Talkers Statue',
-	'GallupBIDFireF1' => 'Mission F1 - Chief Manuelito Statue',
+$twitterToLocation = array(
+	'GallupBIDFire8' => 'Coal_Mining_Era_Mural',
+	'GallupBIDFire10' => 'Navajo_Code_Talkers_Mural',
+	'GallupBIDFire2' => 'Great_Gallup_Mural',
+	'GallupBIDFireG' => 'Mission_G_Painted_Horse_Sculpture',
+	'GallupBIDFireF2' => 'Mission_F2_Code_Talkers_Statue',
+	'GallupBIDFireF1' => 'Mission_F1_Chief_Manuelito_Statue',
+    'GallupBIDFireA2' => 'Mission_A2_First_American_Traders',
+    'GallupBIDFire6' => 'Womens_MultiCultural_Mural',
+    'GallupBIDFire3' => 'Zuni_Mural',
+    'GallupBIDFire5' => 'Veterans_Mural',
+    'GallupBIDFire4' => 'Long Walk_Home_Mural',
 );
 
 define('DEFAULT_GALLERY', '13897183'); // Album ID for album titled: To Be Sorted
 $galleryIds = array(
-	'Mission G: Painted Horse Sculpture' => '13917166',
-	'Great Gallup Mural' => '13917195',
+    'Coal_Mining_Era_Mural' => '13917226',
+    'Navajo_Code_Talkers_Mural' => '13917204',
+    'Great_Gallup_Mural' => '13917195',
+    'Mission_G_Painted_Horse_Sculpture' => '13917166',
+    'Mission_F2_Code_Talkers_Statue' => '13917155',
+    'Mission_F1_Chief_Manuelito_Statue' => '13917148',
+    'Mission_A2_First_American_Traders' => '13917122',
+    'Womens_MultiCultural_Mural' => '13923530',
+    'Zuni_Mural' => '13923538',
+    'Veterans_Mural' => '13923547',
+    'Long Walk_Home_Mural' => '13923595',
 );
 
 $photosAdded = $photosUploaded = 0;
 foreach ($photos as $photo) {
 	$location = "unknown";
-	if (isset($twitterToGallery[$photo->twitterAccount])) {
-		$location = $twitterToGallery[$photo->twitterAccount];
+	if (isset($twitterToLocation[$photo->twitterAccount])) {
+		$location = $twitterToLocation[$photo->twitterAccount];
 	}
 	$photo->location = $location;
 
