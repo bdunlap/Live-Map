@@ -70,7 +70,7 @@ $twitterToLocation = array(
     'GallupBIDFire6' => 'Womens_MultiCultural_Mural',
     'GallupBIDFire3' => 'Zuni_Mural',
     'GallupBIDFire5' => 'Veterans_Mural',
-    'GallupBIDFire4' => 'Long Walk_Home_Mural',
+    'GallupBIDFire4' => 'Long_Walk_Home_Mural',
 );
 
 define('DEFAULT_GALLERY', '13897183'); // Album ID for album titled: To Be Sorted
@@ -85,7 +85,7 @@ $galleryIds = array(
     'Womens_MultiCultural_Mural' => '13923530',
     'Zuni_Mural' => '13923538',
     'Veterans_Mural' => '13923547',
-    'Long Walk_Home_Mural' => '13923595',
+    'Long_Walk_Home_Mural' => '13923595',
 );
 
 $photosAdded = $photosUploaded = 0;
