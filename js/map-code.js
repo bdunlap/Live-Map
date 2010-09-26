@@ -154,12 +154,5 @@ function makeMarker() {
         });
 
 
-setTimeout("manipulateMarker()", 9000);
 }
-
-function manipulateMarker() 
-{
-//marker.setVisible(false);
-}
-
 
